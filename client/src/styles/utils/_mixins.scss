@@ -1,0 +1,66 @@
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition; 
+}
+
+@mixin transform($string) {
+  -moz-transform: $string;
+  -ms-transform: $string;
+  -o-transform: $string;
+  -webkit-transform: $string;
+  transform: $string;
+}
+
+@mixin justify-content($string) {
+  -webkit-justify-content: $string;
+  justify-content: $string;
+}
+
+@mixin align-items($string) {
+  -webkit-align-items: $string;
+  align-items: $string;
+}
+
+@mixin flex-direction($string) {
+  -webkit-flex-direction: $string;
+  flex-direction: $string;
+}
+
+@mixin flex-wrap($string) {
+  -webkit-flex-wrap: $string;
+  flex-wrap: $string;
+}
+
+@mixin flex($string) {
+  -webkit-flex: $string;
+  flex:$string;
+}
+
+@mixin flex-flow($string) {
+  -webkit-flex-flow: $string;
+  flex-flow: $string;
+}
+
+@mixin align-content($string) {
+  -webkit-align-content: $string;
+  align-content: $string;
+}
+
+@mixin order($string) {
+  -webkit-order: $string;
+  order: $string;
+}
+
+@mixin browser-appearance($string) {
+  -webkit-appearance: $string;
+  -moz-appearance: $string;
+  appearance: $string;
+}
+
+@mixin box-shadow($string) {
+  -webkit-box-shadow: $string;
+  -moz-box-shadow: $string;
+  box-shadow: $string;
+}
