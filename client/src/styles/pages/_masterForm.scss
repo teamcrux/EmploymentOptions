@@ -1,0 +1,5 @@
+.master-form-page {
+  > .container {
+    @include align-items(flex-start);
+  }
+}

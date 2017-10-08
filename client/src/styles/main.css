@@ -1,0 +1,290 @@
+/* FONTS */
+@import url("https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300");
+/* COLORS */
+a {
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer; }
+  a.underline {
+    text-decoration: underline; }
+    a.underline:hover {
+      text-decoration: none;
+      opacity: .7; }
+
+a.link-fix {
+  color: inherit;
+  text-decoration: none; }
+
+.button, button, input[type="submit"] {
+  background: white;
+  padding: 10px 25px;
+  color: black;
+  text-decoration: none;
+  border: 1px solid black;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 18px; }
+  .button:hover, button:hover, input[type="submit"]:hover {
+    color: white;
+    background-color: black; }
+
+label {
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 18px; }
+
+input[type="date"], input[type="text"], input[type="email"], input[type="password"], input[type="tel"], input[type="number"], textarea, select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid #7c4399;
+  border-radius: 0;
+  background: #f1f0f0;
+  padding: 10px;
+  resize: none;
+  width: 100%;
+  color: black; }
+
+.flexbox {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+
+* {
+  margin: 0;
+  padding: 0; }
+
+html {
+  height: 100%; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif; }
+
+img {
+  max-width: 100%;
+  height: auto; }
+
+body * {
+  box-sizing: border-box; }
+
+p, li {
+  font-family: "Open Sans Condensed", sans-serif; }
+
+h1 {
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 40px; }
+
+h2 {
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 30px; }
+
+h3 {
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 24px; }
+
+h4 {
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 22px; }
+
+.login-form {
+  width: 400px;
+  margin: 40px auto 0;
+  padding: 40px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 17px 2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0 0 17px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 17px 2px rgba(0, 0, 0, 0.75);
+  background-color: white; }
+  .login-form .form-group:first-of-type {
+    margin-bottom: 15px; }
+  .login-form input[type="text"], .login-form input[type="password"] {
+    border: 1px solid #7c4399; }
+  .login-form button {
+    background-color: #7c4399;
+    border: 1px solid #7c4399;
+    color: white; }
+    .login-form button:hover {
+      background-color: transparent;
+      color: #7c4399; }
+  .login-form .logo-wrapper {
+    text-align: center; }
+  .login-form .button-wrapper {
+    text-align: center; }
+    .login-form .button-wrapper button {
+      margin-top: 15px; }
+
+.user-header {
+  background: -moz-linear-gradient(top, #7c4399 0%, #BAC4D6 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, #7c4399), color-stop(100%, #BAC4D6));
+  background: -webkit-linear-gradient(top, #7c4399 0%, #BAC4D6 100%);
+  background: -o-linear-gradient(top, #7c4399 0%, #BAC4D6 100%);
+  background: -ms-linear-gradient(top, #7c4399 0%, #BAC4D6 100%);
+  background: linear-gradient(to bottom, #7c4399 0%, #BAC4D6 100%);
+  -webkit-align-items: center;
+  align-items: center; }
+  .user-header .logo-wrapper {
+    width: 100px;
+    margin-right: 40px; }
+    .user-header .logo-wrapper img {
+      display: block; }
+  .user-header h1 {
+    color: white; }
+
+.user-navbar {
+  width: 200px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #BAC4D6;
+  margin-top: 10px; }
+  .user-navbar nav {
+    padding: 30px 0 30px 30px; }
+  .user-navbar ul {
+    list-style: none; }
+    .user-navbar ul li {
+      list-style: none;
+      display: block; }
+      .user-navbar ul li + li {
+        margin-top: 10px; }
+      .user-navbar ul li:hover {
+        text-decoration: underline; }
+
+.master-form {
+  -webkit-flex: 1;
+  flex: 1;
+  padding-left: 3%;
+  background-color: #BAC4D6;
+  margin-top: 10px;
+  border-top-left-radius: 10px;
+  margin-left: 2px;
+  padding-bottom: 60px; }
+  .master-form .choose-resume-type {
+    width: auto; }
+  .master-form input, .master-form select, .master-form textarea {
+    max-width: 600px;
+    font-size: 16px;
+    font-family: "Open Sans Condensed", sans-serif; }
+  .master-form label {
+    display: block;
+    margin-bottom: 3px; }
+  .master-form .err-output span {
+    font-family: "Open Sans Condensed", sans-serif;
+    font-size: 12px;
+    color: darkred;
+    margin-left: 5px; }
+  .master-form h1 {
+    margin-bottom: 15px; }
+  .master-form h2 {
+    margin-top: 25px; }
+  .master-form h3, .master-form h4 {
+    margin-top: 15px; }
+  .master-form h4 {
+    margin-bottom: 5px; }
+  .master-form .section {
+    margin-top: 5px; }
+    .master-form .section div + div {
+      margin-top: 10px; }
+  .master-form input[type="date"] {
+    width: auto; }
+  .master-form button {
+    margin-top: 10px; }
+  .master-form li {
+    list-style: none; }
+  .master-form label[for="fulltime"], .master-form label[for="parttime"] {
+    display: inline-block;
+    margin-right: 5px; }
+  .master-form label[for="parttime"] {
+    margin-left: 15px; }
+  .master-form .days label, .master-form .hours label, .master-form .inside-outside label {
+    display: inline-block;
+    margin-right: 4px; }
+  .master-form .days input, .master-form .hours input, .master-form .inside-outside input {
+    margin-right: 10px; }
+  .master-form label[for="no_work_exp"] {
+    display: inline-block;
+    margin-right: 4px; }
+  .master-form .personal-or-business {
+    margin-top: 10px; }
+    .master-form .personal-or-business label {
+      display: inline-block; }
+    .master-form .personal-or-business > div > div {
+      display: inline-block;
+      margin-left: 5px; }
+  .master-form button.add-section {
+    margin-top: 15px; }
+    .master-form button.add-section.task {
+      margin-bottom: 20px; }
+  .master-form .submit-container {
+    margin-top: 50px; }
+    .master-form .submit-container button {
+      width: 300px;
+      background-color: #7c4399;
+      border: 1px solid #7c4399;
+      color: white; }
+      .master-form .submit-container button:hover {
+        background-color: white;
+        color: #7c4399; }
+
+.clients-table {
+  -webkit-flex: 1;
+  flex: 1;
+  background-color: #BAC4D6;
+  border-top-left-radius: 10px;
+  margin-top: 10px;
+  margin-left: 2px; }
+  .clients-table table {
+    width: 100%;
+    border-collapse: collapse; }
+  .clients-table td, .clients-table th {
+    font-family: "Open Sans Condensed", sans-serif;
+    padding-top: 3px;
+    padding-bottom: 3px; }
+    .clients-table td:first-of-type, .clients-table th:first-of-type {
+      padding-left: 3%; }
+  .clients-table td {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black; }
+  .clients-table th {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: left; }
+  .clients-table thead {
+    background-color: #9973b0; }
+    .clients-table thead tr th:first-of-type {
+      border-top-left-radius: 10px; }
+    .clients-table thead tr:hover {
+      background-color: #9973b0;
+      cursor: default; }
+  .clients-table tr:nth-of-type(even) {
+    background-color: #C8D2E4; }
+  .clients-table tr:hover {
+    background-color: #6e78d6;
+    cursor: pointer; }
+
+body.login-page {
+  background: -moz-linear-gradient(top, #7c4399 0%, #BAC4D6 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, #7c4399), color-stop(100%, #BAC4D6));
+  background: -webkit-linear-gradient(top, #7c4399 0%, #BAC4D6 100%);
+  background: -o-linear-gradient(top, #7c4399 0%, #BAC4D6 100%);
+  background: -ms-linear-gradient(top, #7c4399 0%, #BAC4D6 100%);
+  background: linear-gradient(to bottom, #7c4399 0%, #BAC4D6 100%); }
+
+.master-form-page > .container {
+  -webkit-align-items: flex-start;
+  align-items: flex-start; }
+
+/*# sourceMappingURL=main.css.map */

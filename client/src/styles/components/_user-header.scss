@@ -1,0 +1,23 @@
+.user-header {
+  background: -moz-linear-gradient(top, $eoPurple 0%, $lightBlue 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, $eoPurple), color-stop(100%, $lightBlue));
+  background: -webkit-linear-gradient(top, $eoPurple 0%, $lightBlue 100%);
+  background: -o-linear-gradient(top, $eoPurple 0%, $lightBlue 100%);
+  background: -ms-linear-gradient(top, $eoPurple 0%, $lightBlue 100%);
+  background: linear-gradient(to bottom, $eoPurple 0%, $lightBlue 100%);
+
+  @include align-items(center);
+
+  .logo-wrapper {
+    width: 100px;
+    margin-right: 40px;
+
+    img {
+      display: block;
+    }
+  }
+
+  h1 {
+    color: white;
+  }
+}

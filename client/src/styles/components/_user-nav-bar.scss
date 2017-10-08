@@ -1,0 +1,28 @@
+.user-navbar {
+  width: 200px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: $lightBlue;
+  margin-top: 10px;
+
+  nav {
+    padding: 30px 0 30px 30px;
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      list-style: none;
+      display: block;
+
+      + li {
+        margin-top: 10px;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

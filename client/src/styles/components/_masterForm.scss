@@ -1,0 +1,134 @@
+.master-form {
+  @include flex(1);
+  padding-left: 3%;
+  background-color: $lightBlue;
+  margin-top: 10px;
+  border-top-left-radius: 10px;
+  margin-left: 2px;
+  padding-bottom: 60px;
+
+  .choose-resume-type {
+    width: auto;
+  }
+
+  input, select, textarea {
+    max-width: 600px;
+    font-size: 16px;
+    font-family: $bodyCopy;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .err-output  {
+
+    span {
+      font-family: $bodyCopy;
+      font-size: 12px;
+      color: darkred;
+      margin-left: 5px;
+    }
+  }
+
+  h1 {
+    margin-bottom: 15px;
+  }
+
+  h2 {
+    margin-top: 25px;
+  }
+
+  h3, h4 {
+    margin-top: 15px;
+  }
+
+  h4 {
+    margin-bottom: 5px;
+  }
+
+  .section {
+    margin-top: 5px;
+
+    div + div {
+      margin-top: 10px; //test
+    }
+  }
+
+  input[type="date"] {
+    width: auto;
+  }
+
+  button {
+    margin-top: 10px;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  // specific targets
+  label[for="fulltime"], label[for="parttime"] {
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+  label[for="parttime"] {
+    margin-left: 15px;
+  }
+
+  .days, .hours, .inside-outside {
+    label {
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    input {
+      margin-right: 10px;
+    }
+  }
+
+  label[for="no_work_exp"] {
+    display: inline-block;
+    margin-right: 4px;
+  }
+
+  .personal-or-business {
+    margin-top: 10px;
+
+    label {
+      display: inline-block;
+    }
+
+    > div > div {
+      display: inline-block;
+      margin-left: 5px;
+    }
+  }
+
+  button.add-section {
+    margin-top: 15px;
+
+    &.task {
+      margin-bottom: 20px;
+    }
+  }
+
+  .submit-container {
+    margin-top: 50px;
+
+    button {
+      width: 300px;
+      background-color: $eoPurple;
+      border: 1px solid $eoPurple;
+      color: white;
+
+      &:hover {
+        background-color: white;
+        color: $eoPurple;
+      }
+    }
+  }
+
+}
