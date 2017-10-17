@@ -1,0 +1,26 @@
+{
+  "crux": {
+    "username": "esdbmaster",
+    "password": "eugenetrees!",
+    "database": "es_crm",
+    "host": "es-crm.ci3kmqfp5amo.us-west-2.rds.amazonaws.com",
+    "port": 5432,
+    "dialect": "postgres"
+  },
+  "crater": {
+    "username": "esdbmaster",
+    "password": "eugenetrees!",
+    "database": "es_crm",
+    "host": "es-crm.ci3kmqfp5amo.us-west-2.rds.amazonaws.com",
+    "port": 5432,
+    "dialect": "postgres"
+  },
+  "dev": {
+    "username": "postgres",
+    "password": "password",
+    "database": "eo",
+    "host": "localhost",
+    "port": 5432,
+    "dialect": "postgres"
+  }
+}
