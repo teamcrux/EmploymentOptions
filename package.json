@@ -6,9 +6,9 @@
     "start": "node ./bin/www",
     "build": "cd client && npm run build && cd .. && cp -r ./client/build/* ./public",
     "client": "cd client && forever start -c \"npm start\" ./",
-    "dev": "concurrently \"export NODE_ENV=test && env PORT=3001 nodemon ./bin/www\" \"npm run client\"",
-    "crater": "concurrently \"export NODE_ENV=crater && env PORT=3001 nodemon ./bin/www\" \"npm run client\"",
-    "crux": "concurrently \"export NODE_ENV=crux && env PORT=3001 nodemon ./bin/www\" \"npm run client\""
+    "dev_client": "cd client && npm start",
+    "dev": "concurrently \"export NODE_ENV=test && env PORT=3001 nodemon ./bin/www\" \"npm run dev_client\"",
+    "production": "concurrently \"export NODE_ENV=development && env PORT=3001 nodemon ./bin/www\" \"npm run client\""
   },
   "dependencies": {
     "bcrypt": "^1.0.2",
