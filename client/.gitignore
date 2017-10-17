@@ -16,3 +16,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Environment
+.env
+server/config/config.json
+server/config/superuser.js
