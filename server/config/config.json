@@ -15,7 +15,7 @@
     "port": 5432,
     "dialect": "postgres"
   },
-  "dev": {
+  "test": {
     "username": "postgres",
     "password": "password",
     "database": "eo",
