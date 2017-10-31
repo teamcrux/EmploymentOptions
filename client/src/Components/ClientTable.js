@@ -2,8 +2,38 @@ import React, { Component } from 'react';
 import createResume from './ResumeGenerator';
 import UserProfile from './UserProfile';
 import { NavLink } from 'react-router-dom';
-
 const moment = require('moment');
+const moment = require('moment');
+const FileSaver = require('file-saver');
+const getResume = (id) =>{
+  fetch(`/api/clients/${id}/resume.pdf`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'JWT '+localStorage.getItem("token")
+    },
+    method: 'GET'
+  })
+  .then((response) => response.json())
+  .then((responseJson) => {
+    createResume(JSON.stringify(responseJson));
+  });
+};
+
+const downResume = (id) =>{
+  fetch(`/api/pdf/${id}`, {
+    headers: {
+      'Accept': 'application/pdf',
+      'Content-Type': 'application/pdf',
+      'Authorization': 'JWT '+localStorage.getItem("token")
+    },
+    method: 'GET'
+  })
+  .then((response) => response.blob())
+  .then((responseBlob) => {
+     FileSaver.saveAs(responseBlob, 'nameFile.pdf');
+  });
+};
 
 class ClientData extends Component {
   constructor(props){
@@ -64,6 +94,7 @@ class ClientData extends Component {
               <th>Last Name</th>
               <th>DOB</th>
               <th>View</th>
+              <th>Download PDF</th>
             </tr>
           </thead>
           <tbody id="client-table-body">

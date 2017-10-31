@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const session = require('express-session');
 const passport = require('passport');
+//const pdf = require('pdfkit');
 require('./server/config/passport')(passport);
 
 const routes = require('./server/router/index');
@@ -57,6 +58,7 @@ app.use('/api', passport.authenticate('jwt', {session: false}) ,routes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
+  //var doc = new pdf();
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
