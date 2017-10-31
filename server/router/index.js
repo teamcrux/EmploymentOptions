@@ -30,4 +30,7 @@ router.use('/clients', clients);
 //EmploymentDetails
 router.use('/employmentdetail', employmentdetail)
 
+// PDFs
+router.use('/pdf', pdf);
+
 module.exports = router;
