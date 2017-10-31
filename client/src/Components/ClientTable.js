@@ -3,7 +3,6 @@ import createResume from './ResumeGenerator';
 import UserProfile from './UserProfile';
 import { NavLink } from 'react-router-dom';
 const moment = require('moment');
-const moment = require('moment');
 const FileSaver = require('file-saver');
 
 class ClientData extends Component {
@@ -34,6 +33,21 @@ class ClientData extends Component {
     });
   };
 
+  downResume = (id) =>{
+    fetch(`/api/pdf/${id}`, {
+      headers: {
+        'Accept': 'application/pdf',
+        'Content-Type': 'application/pdf',
+        'Authorization': 'JWT '+localStorage.getItem("token")
+      },
+      method: 'GET'
+    })
+    .then((response) => response.blob())
+    .then((responseBlob) => {
+       FileSaver.saveAs(responseBlob, 'nameFile.pdf');
+    });
+  };
+
   componentDidMount(){
     this.getClients();
   }
@@ -53,6 +67,7 @@ class ClientData extends Component {
               activeClassName="selected"
               >View</NavLink>
         </td>
+        <td><button onClick={()=>this.downResume(item.id)}> Download Resume </button></td>
       </tr>
     ))
 
