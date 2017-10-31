@@ -4,6 +4,7 @@ const users = require('./routes/users');
 const userTypes = require('./routes/userTypes');
 const jobDevelopers = require('./routes/jobDevelopers');
 const clients = require('./routes/clients');
+const employmentdetail = require('./routes/employmentdetail');
 const pdf = require('./routes/pdf');
 const passport = require('passport');
 require('../config/passport')(passport);
@@ -26,6 +27,9 @@ router.use('/job-developers', jobDevelopers);
 
 // Clients
 router.use('/clients', clients);
+
+//EmploymentDetails
+router.use('/employmentdetail', employmentdetail);
 
 // PDFs
 router.use('/pdf', pdf);
