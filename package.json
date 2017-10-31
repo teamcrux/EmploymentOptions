@@ -6,7 +6,7 @@
     "dev": "concurrently \"export NODE_ENV=development && env PORT=3001 nodemon ./bin/www\" \"npm run dev_client\"",
     "dev_client": "cd client && npm start",
     "start": "node ./bin/www",
-    "build": "cd client && npm run build && cd .. && cp -r ./client/build/* ./public",
+    "build": "mkdir public && cd client && npm run build && cd .. && cp -r ./client/build/* ./public",
     "production": "concurrently \"export NODE_ENV=production && env PORT=3001 forever start -c 'npm start' ./bin/www\" \"npm run client\"",
     "client": "cd client && forever start -c \"npm start\" ./"
   },
