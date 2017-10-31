@@ -34,7 +34,7 @@ export default function createResume (data) {
     for (var i = 0; i < exp.length; i++) {
       var job = exp[i];
       list += "<h4><u>" + job.organization + ' - ' + job.location + ' - ' + job.job_title + "</u></h4>";
-      list += job.description + "<br><br> Responsibilities:<br>"
+      list += job.description + "<br><br> TECHNICAL SKILLS:<br>"
       var duties = JSON.parse(job.job_duties);
       console.log("duties: ", duties);
       for (var j = 0; j < duties.length; j++) {
@@ -159,7 +159,7 @@ export default function createResume (data) {
       win.document.getElementById('skills').innerHTML = '<h4><u>KEY SKILLS</u></h4>' + getSkills() ;
     }
     if (data.EmploymentDetails) {
-      win.document.getElementById('prof_exp').innerHTML = '<h4><u>PROFESSIONAL EXPERIENCE</u></h4>' + getExperience() ;
+      win.document.getElementById('prof_exp').innerHTML = '<h4><u>TECHNICAL EXPERIENCE</u></h4>' + getExperience() ;
     }
     if (data.EducationDetails) {
       win.document.getElementById('education').innerHTML = '<h4><u>EDUCATION</u></h4>' + getEducation();
