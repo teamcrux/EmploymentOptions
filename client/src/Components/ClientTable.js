@@ -3,7 +3,6 @@ import createResume from './ResumeGenerator';
 import UserProfile from './UserProfile';
 import { NavLink } from 'react-router-dom';
 const moment = require('moment');
-const moment = require('moment');
 const FileSaver = require('file-saver');
 const getResume = (id) =>{
   fetch(`/api/clients/${id}/resume.pdf`, {
