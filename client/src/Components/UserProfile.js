@@ -5,6 +5,8 @@ import UserNavBar from './UserNavBar';
 import PersonalEdit from './PersonalEdit';
 import PersonalData from './PersonalData';
 import GeneralData from './GeneralData';
+import JobData from './JobData';
+import renderExperience from './Experience'
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -37,7 +39,7 @@ class UserProfile extends React.Component {
         EditPersonal: false,
         userDetails: responseJson,
       });
-    });
+    })
   };
 
   editSection = section => {
@@ -73,8 +75,11 @@ class UserProfile extends React.Component {
               {!this.state.EditPersonal && <button onClick={(e) => this.editSection("Personal")}> Edit </button>}
               {this.state.EditPersonal && <button onClick={(e) => this.getUser()}> Cancel </button>}
             </div>
-            {!this.state.EditPersonal && <PersonalData user={this.state.userDetails} />}
-            {this.state.EditPersonal && <PersonalEdit user={this.state.userDetails} makeEdit={this.editMade}/> }
+            <div>
+              {!this.state.EditPersonal && <PersonalData user={this.state.userDetails} />}
+              {this.state.EditPersonal && <PersonalEdit user={this.state.userDetails} makeEdit={this.editMade}/> }
+            </div>
+              <JobData user={this.state.userDetails} makeEdit={this.editMade}/>
           </div>
         </div>
       </div>

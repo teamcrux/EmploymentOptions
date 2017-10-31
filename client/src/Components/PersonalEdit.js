@@ -23,9 +23,6 @@ class PersonalEdit extends React.Component {
     .then(res => res.json())
     .then(responseJson => {
       console.log("resp",responseJson);
-      this.setState({
-        formSubmitted: true,
-      })
       this.props.makeEdit();
      });
   };
