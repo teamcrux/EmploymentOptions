@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import createResume from './ResumeGenerator';
-import createDownloadableResume from './DownloadableResumeGenerator'
+import UserProfile from './UserProfile';
+import { NavLink } from 'react-router-dom';
+const moment = require('moment');
 const moment = require('moment');
 const FileSaver = require('file-saver');
 const getResume = (id) =>{
@@ -36,55 +38,9 @@ const downResume = (id) =>{
 class ClientData extends Component {
   constructor(props){
     super(props);
-    this.populateTable = this.populateTable.bind(this);
     this.getClients = this.getClients.bind(this);
     this.state = {
-      clientData: {}
-    }
-  }
-
-  componentDidMount(){
-    this.getClients();
-  }
-
-  populateTable (x) {
-    let arr = JSON.parse(x);
-    for (var index in arr) {
-      let row = document.createElement('tr');
-      let reg_date = document.createElement('td');
-      let first_name = document.createElement('td');
-      let last_name = document.createElement('td');
-      let dob = document.createElement('td');
-      let resume = document.createElement('td');
-      let downPDF = document.createElement('td');
-      let reg_date_moment = moment(arr[index].registration_date);
-      reg_date.innerHTML = reg_date_moment.format('MM/DD/YY');
-      first_name.innerHTML = arr[index].first_name;
-      last_name.innerHTML = arr[index].last_name;
-      let dob_moment = moment(arr[index].dob);
-      dob.innerHTML = dob_moment.format('MM/DD/YY');
-      downPDF.innerHTML = "Get PDF";
-      downPDF.onclick = function() {
-        //downResume(this.getAttribute('data-id'));
-        console.log(this.getAttribute('data-id'));
-        //console.log(this.getAttribute('data-json'));
-        //createResume(this.getAttribute('data-json'));
-      };
-      row.appendChild(reg_date);
-      row.appendChild(first_name);
-      row.appendChild(last_name);
-      row.appendChild(dob);
-      row.appendChild(resume);
-      row.appendChild(downPDF);
-      row.setAttribute('data-json', JSON.stringify(arr[index]));
-      row.setAttribute('data-id', arr[index].id);
-      row.onclick = function() {
-        console.log(this.getAttribute('data-id'));
-        //console.log(this.getAttribute('data-json'));
-        //createResume(this.getAttribute('data-json'));
-        downResume(this.getAttribute('data-id'));
-      };
-      document.getElementById("client-table-body").appendChild(row);
+      clientData: [],
     }
   }
 
@@ -99,11 +55,35 @@ class ClientData extends Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      this.populateTable(JSON.stringify(responseJson));
+      this.setState({
+        clientData: responseJson,
+        fetchDone: true,
+      });
     });
   };
 
-  render(){
+  componentDidMount(){
+    this.getClients();
+  }
+
+  render() {
+
+    console.log("inside render", this.state.clientData);
+    const persons = this.state.clientData.map(item => (
+      <tr>
+        <td> {moment(item.registration_date).format('MM/DD/YY')} </td>
+        <td> {item.first_name} </td>
+        <td> {item.last_name} </td>
+        <td> {item.dob} </td>
+        <td>
+          <NavLink id="toUser"
+              to={`/user/${item.id}`}
+              activeClassName="selected"
+              >View</NavLink>
+        </td>
+      </tr>
+    ))
+
     return (
       <div className="clients-table">
         <table>
@@ -113,15 +93,16 @@ class ClientData extends Component {
               <th>First Name</th>
               <th>Last Name</th>
               <th>DOB</th>
-              <th>Resume</th>
+              <th>View</th>
               <th>Download PDF</th>
             </tr>
           </thead>
           <tbody id="client-table-body">
+            {persons}
           </tbody>
         </table>
       </div>
-    );
+    )
   }
 }
 

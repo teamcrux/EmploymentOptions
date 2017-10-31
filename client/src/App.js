@@ -4,6 +4,9 @@ import MasterForm from './Components/MasterForm.js';
 import ClientData from './Components/ClientData.js';
 import LoginForm from './Components/LoginForm';
 import Logout from './Components/Logout';
+import CreateUser from './Components/CreateUser';
+import UserProfile from './Components/UserProfile';
+
 import {
   BrowserRouter as Router,
   Route
@@ -44,6 +47,8 @@ class App extends Component {
               <Route path="/masterform" component={MasterForm} />
               <Route path="/clients" component={ClientData} />
               <Route path="/logout" component={Logout} />
+              <Route path="/createUser" component={CreateUser} />
+              <Route path="/user/:id" component={UserProfile} />
             </div>
           </div>
         </Router>

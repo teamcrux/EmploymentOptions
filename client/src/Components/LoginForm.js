@@ -31,7 +31,7 @@ class LoginForm  extends Component {
 			if(login.success){
 				localStorage.setItem("token", login.token);
 				this.setState({
-					loginSuccess: true
+					loginSuccess: true,
 				});
 			} else {
 				this.setState({

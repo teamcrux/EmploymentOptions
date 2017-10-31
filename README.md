@@ -1,4 +1,4 @@
-# team-crater-eo
+# team-crux-eo
 An application for Employment Options vocational rehabilitation program
 
 
@@ -6,7 +6,9 @@ An application for Employment Options vocational rehabilitation program
 
 Make sure to run `npm install` at the top level of the project, and if you're working on the front-end, change directories to `client/` and run `npm install` again.
 
-To fire up the server locally for development, you can run `npm run dev` and that should start the main Express server and the mini front-end server that will serve up the React application.
+To fire up the server locally for development, you can run <code>npm run dev</code> and that should start the main Express server and the mini front-end server that will serve up the React application.
+
+To run in production, run <code>mkdir public</code> if a public directory doesn't exist. Then run <code>npm run build</code> and <code>npm run production</code>.
 
 Before running these, you should make sure that ports 3000 and 3001 are available for these to run on.
 

@@ -36,6 +36,7 @@ export default function createResume (data) {
       list += "<h4><u>" + job.organization + ' - ' + job.location + ' - ' + job.job_title + "</u></h4>";
       list += job.description + "<br><br> Responsibilities:<br>"
       var duties = JSON.parse(job.job_duties);
+      console.log("duties: ", duties);
       for (var j = 0; j < duties.length; j++) {
         var obj = duties[j];
         if (j === 0) {

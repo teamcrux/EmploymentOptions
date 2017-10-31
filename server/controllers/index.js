@@ -3,7 +3,9 @@ const users = require('./users');
 const userTypes = require('./userTypes');
 const jobDevelopers = require('./jobDevelopers');
 const clients = require('./clients');
-const pdf = require('./pdf')
+const employmentdetail = require('./employmentdetail');
+const pdf = require('./pdf');
+
 
 module.exports = {
   jobs,
@@ -11,5 +13,6 @@ module.exports = {
   userTypes,
   jobDevelopers,
   clients,
+  employmentdetail,
   pdf
 };

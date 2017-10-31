@@ -276,7 +276,35 @@ module.exports = {
           return res.status(200).send(client);
         })
         .catch(error => res.status(400).send(error));
-  }
+  },
+
+  updateOne(req, res) {
+    let formData = req.body;
+
+    if (formData === null || formData === undefined || formData === 'undefined') {
+      res.status(400).send('bad request');
+      return;
+    }
+
+    return Client
+      .update({
+        first_name: formData.fname,
+        last_name: formData.lname,
+        dob: formData.dob,
+        race: formData.race,
+        gender: formData.gender,
+        phone: formData.phone,
+        email: formData.email,
+        ssn: formData.ssn,
+        odl: formData.odl,
+        foodhc: formData.foodhc
+      }, {
+        where: {id: formData.id},
+        returning: true,
+        plain: true
+      })
+      .then(updatedClient => res.status(200).send(JSON.stringify(updatedClient)));
+    }
 };
 
 
