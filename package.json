@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "dev": "concurrently \"export NODE_ENV=development && env PORT=3001 nodemon ./bin/www\" \"npm run dev_client\"",
+    "dev_client": "cd client && npm start",
     "start": "node ./bin/www",
     "build": "cd client && npm run build && cd .. && cp -r ./client/build/* ./public",
-    "client": "cd client && forever start -c \"npm start\" ./",
-    "dev_client": "cd client && npm start",
-    "dev": "concurrently \"export NODE_ENV=test && env PORT=3001 nodemon ./bin/www\" \"npm run dev_client\"",
-    "production": "concurrently \"export NODE_ENV=development && env PORT=3001 nodemon ./bin/www\" \"npm run client\""
+    "production": "concurrently \"export NODE_ENV=production && env PORT=3001 forever start -c 'npm start' ./bin/www\" \"npm run client\"",
+    "client": "cd client && forever start -c \"npm start\" ./"
   },
   "dependencies": {
     "bcrypt": "^1.0.2",
@@ -18,6 +18,7 @@
     "email-validator": "^1.0.7",
     "express": "~4.15.2",
     "express-session": "^1.15.2",
+    "forever": "^0.15.3",
     "hbs": "~4.0.1",
     "jsonwebtoken": "^7.4.1",
     "morgan": "~1.8.1",
@@ -25,6 +26,7 @@
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0",
+    "pdfkit": "^0.8.3",
     "pg": "^6.1.5",
     "pg-hstore": "^2.3.2",
     "sequelize": "^3.30.4",
