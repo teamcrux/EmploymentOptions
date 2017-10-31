@@ -5,5 +5,6 @@ const clientsController = require('../../controllers/index').clients;
 router.post('/', clientsController.create);
 router.get('/:clientId', clientsController.getOneAll);
 router.get('/', clientsController.getAll);
+//router.get('/:clientId/resume.pdf', clientsController.generatePDF);
 
 module.exports = router;

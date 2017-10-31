@@ -11,6 +11,7 @@
   "dependencies": {
     "bcrypt": "^1.0.2",
     "body-parser": "~1.17.1",
+    "brfs": "^1.4.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "email-validator": "^1.0.7",
@@ -23,10 +24,12 @@
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0",
+    "pdfkit": "^0.8.0",
     "pg": "^6.1.5",
     "pg-hstore": "^2.3.2",
     "sequelize": "^3.30.4",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "transform-loader": "^0.2.4"
   },
   "devDependencies": {
     "concurrently": "^3.4.0",
