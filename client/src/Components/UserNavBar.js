@@ -11,6 +11,7 @@ class UserNavBar extends React.Component {
             <li><Link to="/clients">Clients</Link></li>
             <li><Link to="/masterform">Master Form</Link></li>
             <li><Link to="/logout">Logout</Link></li>
+            <li><Link to="/createUser">Add User</Link></li>
           </ul>
         </nav>
       </div>

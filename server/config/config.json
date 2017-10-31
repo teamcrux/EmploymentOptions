@@ -9,8 +9,8 @@
   },
   "test": {
     "username": "postgres",
-    "password": "password",
-    "database": "eo",
+    "password": null,
+    "database": "eo-crm-test",
     "host": "localhost",
     "port": 5432,
     "dialect": "postgres"
