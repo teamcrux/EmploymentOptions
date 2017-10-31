@@ -5,9 +5,6 @@ import renderExperience from './Experience';
 class JobData extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      
-    }
     this.addJob = this.addJob.bind(this);
   };
 
