@@ -32,184 +32,269 @@ module.exports = {
           });
         }
 
-        const doc = new PDFDocument()
-        filename = 'Test.pdf'
+        filename = client.first_name + "_" + client.last_name + "_Resume"
 
-        res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"')
+        res.setHeader('Content-disposition', 'attachment;')
+        res.setHeader('filename', filename)
         res.setHeader('Content-type', 'application/pdf')
-        //Creates Header with Name, Phone Number, and Email
-        doc.moveTo(300,10)
+
+        //Creates pdf document
+        const doc = new PDFDocument()
+
+        //Creates color scheme on edges
+        doc.rect(0,0,doc.page.width,20).fillAndStroke('#7c4399')
+        doc.rect(0,0,20,doc.page.height).fillAndStroke('black')
+
+        //Creates Header with Name, Address, Email, and Phone #
+        doc.fillColor('#7c4399')
+        doc.font('Times-Roman')
         doc.fontSize(25)
-        doc.text (client.first_name + " " + client.last_name, {
-          width: 412,
-          align: 'center',
+        doc.fillColor('#7c4399')
+        doc.text (client.first_name + " " + client.last_name, 0, 30 ,{
+          width: (doc.page.width/2),
           indent: 30,
+          align: 'left',
           ellipsis: true
         })
 
         doc.moveDown(0.1)
         doc.fontSize(9)
-        doc.text (client.phone ,{
-          width: 412,
-          align: 'center',
+        doc.text (client.Address.street_address_one +
+                  ", " +  client.Address.city + ", " + client.Address.state,{
+          width: (doc.page.width/2),
           indent: 30,
+          align: 'left',
           ellipsis: true
         })
 
         doc.moveDown(0.1)
         doc.fontSize(9)
         doc.text (client.email ,{
-          width: 412,
-          align: 'center',
+          width: (doc.page.width/2),
           indent: 30,
+          align: 'left',
           ellipsis: true
         })
 
-        doc.lineCap('round')
-          .moveTo(50, 125)
-          .lineTo(570, 125)
-          .stroke()
+        doc.moveDown(0.1)
+        doc.fontSize(9)
+        doc.text (client.phone ,{
+          width: (doc.page.width/2),
+          indent: 30,
+          align: 'left',
+          ellipsis: true
+        })
 
 
+        //Sets Objective
+        doc.rect(30, 100, 500, 16).fillAndStroke('#E3E3E3', '#7c4399')
+        doc.fillColor('#7c4399')
+        doc.moveDown(1)
+        doc.fontSize(12)
+        doc.text ("Objective", 35, (doc.y + 1) ,{
+          width: (doc.page.width/2),
+          align: 'left',
+          ellipsis: true
+        })
+
+        doc.moveDown(0.5)
+        doc.fillColor('black')
+        doc.fontSize(10)
+        doc.text (client.goal, 35, (doc.y + 1) ,{
+          width: (doc.page.width/2),
+          indent: 5,
+          align: 'left',
+          ellipsis: true
+        })
 
 
-        try{
-          let skills = JSON.parse(client.key_skills)
-          if(skills != null){
-            doc.moveDown(0.3)
-            doc.fontSize(12)
-            doc.text ("Key Skills", {
+        //displays Key Skills(if any)
+        let skills = JSON.parse(client.key_skills)
+        if(skills != null){
+
+          doc.moveDown(0.5)
+          doc.rect(30, doc.y - 2, 500, 16).fillAndStroke('#E3E3E3', '#7c4399')
+          doc.fillColor('#7c4399')
+          doc.fontSize(12)
+          doc.text ("Key Skills", 35, (doc.y + 1) ,{
+            width: (doc.page.width/2),
+            align: 'left',
+            ellipsis: true
+          })
+          doc.moveDown(0.5)
+          doc.fillColor('black')
+
+          console.log(skills.length);
+          for (var i = 0; i < skills.length; i++) {
+            //console.log(skills[i]['key_skill'])
+            doc.moveDown(0.1)
+            doc.fontSize(9)
+            doc.text (skills[i]['key_skill'] ,{
               width: 412,
+              indent: 5,
               align: 'left',
               ellipsis: true
             })
-            doc.moveDown(0.1)
-            doc.lineCap('round')
-            .moveTo(70, doc.y)
-            .lineTo(120, doc.y)
-            .stroke()
-            doc.moveDown(0.1)
-            console.log(skills.length);
-            for (var i = 0; i < skills.length; i++) {
-              //console.log(skills[i]['key_skill'])
-              doc.moveDown(0.1)
-              doc.fontSize(9)
-              doc.text (skills[i]['key_skill'] ,{
-                width: 412,
-                align: 'left',
-                ellipsis: true
-              })
-            }
           }
-        }catch(ex){
-          console.log(ex)
         }
 
-        try{
-          let exp = client.EmploymentDetails
-          if(exp != null){
-            doc.moveDown(0.3)
-            doc.fontSize(12)
-            doc.text ("Employment Details", {
+        //displays Employment Details(if any)
+        let exp = client.EmploymentDetails
+        if(exp != null){
+          doc.moveDown(0.5)
+          doc.rect(30, doc.y - 2, 500, 16).fillAndStroke('#E3E3E3', '#7c4399')
+          doc.fillColor('#7c4399')
+          doc.fontSize(12)
+          doc.text ("Employment", 35, (doc.y + 1) ,{
+            width: (doc.page.width/2),
+            align: 'left',
+            ellipsis: true
+          })
+
+          doc.moveDown(0.5)
+          console.log(exp.length)
+          for(var i = 0; i < exp.length; i++){
+            if(i != 0){
+              doc.moveDown(1.5)
+            }
+            doc.fillColor('#7c4399')
+            var job = exp[i]
+            console.log(job)
+            doc.moveDown(0.1)
+            doc.fontSize(11)
+            doc.font('Times-Bold')
+            doc.fillColor('#7c4399')
+            doc.text (job.organization ,{
+              width: doc.page.width - 150,
+              indent: 5,
+              align: 'left',
+              continued: true
+            })
+            .fillColor('black')
+            .font('Times-Italic')
+            .text(job.location,{
+              align: 'right'
+            })
+            doc.font('Times-Roman')
+            doc.moveDown(0.2)
+            doc.text (job.job_title ,{
               width: 412,
+              indent: 5,
+              align: 'left',
+              continued: true
+            })
+            .fillColor('black')
+            .font('Times-Italic')
+            .text(job.start+ " - "+ job.end,{
+              align: 'right'
+            })
+            doc.moveDown(1)
+            doc.fontSize(9)
+            doc.fillColor('black')
+            doc.text (job.description ,{
+              width: 412,
+              indent: 20,
               align: 'left',
               ellipsis: true
             })
-            doc.moveDown(0.1)
-            doc.lineCap('round')
-            .moveTo(70, doc.y)
-            .lineTo(180, doc.y)
-            .stroke()
-            doc.moveDown(0.1)
-            console.log(exp.length)
-            for(var i = 0; i < exp.length; i++){
-              var job = exp[i]
-              console.log(job)
-              doc.moveDown(0.1)
-              doc.fontSize(9)
-              doc.text (job.organization + " - " + job.location + " - " + job.job_title ,{
-                width: 412,
-                align: 'left',
-                ellipsis: true
-              })
-              doc.moveDown(0.1)
-              doc.fontSize(9)
-              doc.text (job.description ,{
-                width: 412,
-                align: 'left',
-                ellipsis: true
-              })
-            }
           }
-        }catch(ex){
-          console.log(ex)
         }
 
+        //Displays Education Details (if any)
+        let edu = client.EducationDetails
+        if(edu != null){
+          doc.moveDown(0.5)
+          doc.rect(30, doc.y - 2, 500, 16).fillAndStroke('#E3E3E3', '#7c4399')
+          doc.fillColor('#7c4399')
+          doc.fontSize(12)
+          doc.text ("Education", 35, (doc.y + 1) ,{
+            width: (doc.page.width/2),
+            align: 'left',
+            ellipsis: true
+          })
+          doc.fillColor('black')
+          doc.moveDown(0.5)
+          if (edu){
+            console.log(edu.length)
+            for(var i = 0; i < edu.length; i++){
+              doc.moveDown(0.5)
+              var school = edu[i]
+              if(school.high_school){
+                if(school.hs_diploma){
+                  doc.moveDown(0.1)
+                  doc.fontSize(9)
+                  doc.fillColor('#7c4399')
+                  doc.text (school.name,{
+                    width: 412,
+                    indent: 5,
+                    align: 'left',
+                    ellipsis: true
+                  })
 
-        try{
-          let edu = client.EducationDetails
-          if(edu != null){
-            doc.moveDown(0.3)
-            doc.fontSize(12)
-            doc.text ("Education", {
-              width: 412,
-              align: 'left',
-              ellipsis: true
-            })
-            doc.moveDown(0.1)
-            doc.lineCap('round')
-            .moveTo(70, doc.y)
-            .lineTo(130, doc.y)
-            .stroke()
-            doc.moveDown(0.1)
-            if (edu){
-              console.log(edu.length)
-              for(var i = 0; i < edu.length; i++){
-                var school = edu[i]
-                if(school.high_school){
-                  if(school.hs_diploma){
-                    doc.moveDown(0.1)
-                    doc.fontSize(9)
-                    doc.text ("High School Diploma - " + school.name ,{
-                      width: 412,
-                      align: 'left',
-                      ellipsis: true
-                    })
-                  }
-                  else if(school.ged){
-                    doc.moveDown(0.1)
-                    doc.fontSize(9)
-                    doc.text (school.name + " - GED" ,{
-                      width: 412,
-                      align: 'left',
-                      ellipsis: true
-                    })
-                  }
-                  else if(school.college){
-                    doc.moveDown(0.1)
-                    doc.fontSize(9)
-                    doc.text (school.certificate + " - " + school.name ,{
-                      width: 412,
-                      align: 'left',
-                      ellipsis: true
-                    })
-                  }
-                  else if(school.vocational){
-                    doc.moveDown(0.1)
-                    doc.fontSize(9)
-                    doc.text (school.certificate ,{
-                      width: 412,
-                      align: 'left',
-                      ellipsis: true
-                    })
-                  }
+                  doc.fillColor('black')
+                  doc.moveDown(0.1)
+                  doc.fontSize(9)
+                  doc.text ("Diploma",{
+                    width: 412,
+                    indent: 10,
+                    align: 'left',
+                    ellipsis: true
+                  })
                 }
-                console.log(school)
+                if(school.ged){
+                  doc.moveDown(0.1)
+                  doc.fontSize(9)
+                  doc.fillColor('#7c4399')
+                  doc.text (school.name ,{
+                    width: 412,
+                    indent: 5,
+                    align: 'left',
+                    ellipsis: true
+                  })
+
+                  doc.fillColor('black')
+                  doc.moveDown(0.1)
+                  doc.fontSize(9)
+                  doc.text ("GED",{
+                    width: 412,
+                    indent: 10,
+                    align: 'left',
+                    ellipsis: true
+                  })
+                }
               }
+              if(school.college){
+                doc.moveDown(0.1)
+                doc.fontSize(9)
+                doc.fillColor('#7c4399')
+                doc.text (school.name ,{
+                  width: 412,
+                  indent: 5,
+                  align: 'left',
+                  ellipsis: true
+                })
+
+                doc.fillColor('black')
+                doc.text (school.certificate ,{
+                  width: 412,
+                  indent: 10,
+                  align: 'left',
+                  ellipsis: true
+                })
+              }
+              if(school.vocational){
+                doc.moveDown(0.1)
+                doc.fontSize(9)
+                doc.fillColor('#7c4399')
+                doc.text (school.certificate ,{
+                  width: 412,
+                  align: 'left',
+                  ellipsis: true
+                })
+              }
+              console.log(school)
             }
           }
-        }catch(ex){
-          console.log(ex)
         }
 
         doc.pipe(res)
