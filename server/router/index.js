@@ -34,4 +34,7 @@ router.use('/employmentdetail', employmentdetail);
 // PDFs
 router.use('/pdf', pdf);
 
+// PDFs
+router.use('/pdf', pdf);
+
 module.exports = router;
