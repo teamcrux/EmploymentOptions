@@ -33,7 +33,7 @@ class ClientData extends Component {
     });
   };
 
-  downResume = (id) =>{
+  downResume = (id, firstName, lastName) =>{
     fetch(`/api/pdf/${id}`, {
       headers: {
         'Accept': 'application/pdf',
@@ -42,9 +42,13 @@ class ClientData extends Component {
       },
       method: 'GET'
     })
-    .then((response) => response.blob())
+    .then((response) => {
+      //console.log(response.headers)
+      return response.blob()
+    })
     .then((responseBlob) => {
-       FileSaver.saveAs(responseBlob, 'nameFile.pdf');
+      //console.log(response.body)
+       FileSaver.saveAs(responseBlob, firstName + "_" + lastName + "_Resume");
     });
   };
 
@@ -67,7 +71,7 @@ class ClientData extends Component {
               activeClassName="selected"
               >View</NavLink>
         </td>
-        <td><button onClick={()=>this.downResume(item.id)}> Download Resume </button></td>
+        <td><button onClick={()=>this.downResume(item.id, item.first_name, item.last_name)}> Download Resume </button></td>
       </tr>
     ))
 

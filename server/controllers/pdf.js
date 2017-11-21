@@ -165,7 +165,7 @@ module.exports = {
             doc.font('Times-Bold')
             doc.fillColor('#7c4399')
             doc.text (job.organization ,{
-              width: doc.page.width - 150,
+              width: doc.page.width - 125,
               indent: 5,
               align: 'left',
               continued: true
@@ -177,22 +177,100 @@ module.exports = {
             })
             doc.font('Times-Roman')
             doc.moveDown(0.2)
+            monthNum = job.start.getMonth()
+            switch (monthNum) {
+              case 0:
+                month = "January"
+                break;
+              case 1:
+                month = "February"
+                break
+              case 2:
+                month = "March"
+                break
+              case 3:
+                month = "April"
+                break
+              case 4:
+                month = "May"
+                break
+              case 5:
+                month = "June"
+                break;
+              case 6:
+                month = "July"
+                break
+              case 7:
+                month = "August"
+                break
+              case 8:
+                month = "September"
+                break
+              case 9:
+                month = "October"
+                break;
+              case 10:
+                month = "November"
+                break
+              default:
+                month = "December"
+
+            }
+            monthNum2 = job.end.getMonth()
+            switch (monthNum2) {
+              case 0:
+                Emonth = "January"
+                break;
+              case 1:
+                Emonth = "February"
+                break
+              case 2:
+                Emonth = "March"
+                break
+              case 3:
+                Emonth = "April"
+                break
+              case 4:
+                Emonth = "May"
+                break
+              case 5:
+                Emonth = "June"
+                break;
+              case 6:
+                Emonth = "July"
+                break
+              case 7:
+                Emonth = "August"
+                break
+              case 8:
+                Emonth = "September"
+                break
+              case 9:
+                Emonth = "October"
+                break;
+              case 10:
+                Emonth = "November"
+                break
+              default:
+                Emonth = "December"
+
+            }
             doc.text (job.job_title ,{
-              width: 412,
+              width: doc.page.width - 125,
               indent: 5,
               align: 'left',
               continued: true
             })
             .fillColor('black')
             .font('Times-Italic')
-            .text(job.start+ " - "+ job.end,{
+            .text(month + " " + job.start.getFullYear() + " - " + Emonth + " " + job.end.getFullYear(),{
               align: 'right'
             })
             doc.moveDown(1)
             doc.fontSize(9)
             doc.fillColor('black')
             doc.text (job.description ,{
-              width: 412,
+              width: doc.page.width - 125,
               indent: 20,
               align: 'left',
               ellipsis: true
@@ -207,6 +285,7 @@ module.exports = {
           doc.rect(30, doc.y - 2, 500, 16).fillAndStroke('#E3E3E3', '#7c4399')
           doc.fillColor('#7c4399')
           doc.fontSize(12)
+          doc.font('Times-Roman')
           doc.text ("Education", 35, (doc.y + 1) ,{
             width: (doc.page.width/2),
             align: 'left',
@@ -222,7 +301,8 @@ module.exports = {
               if(school.high_school){
                 if(school.hs_diploma){
                   doc.moveDown(0.1)
-                  doc.fontSize(9)
+                  doc.fontSize(11)
+                  doc.font('Times-Bold')
                   doc.fillColor('#7c4399')
                   doc.text (school.name,{
                     width: 412,
@@ -234,6 +314,7 @@ module.exports = {
                   doc.fillColor('black')
                   doc.moveDown(0.1)
                   doc.fontSize(9)
+                  doc.font('Times-Roman')
                   doc.text ("Diploma",{
                     width: 412,
                     indent: 10,
@@ -243,8 +324,9 @@ module.exports = {
                 }
                 if(school.ged){
                   doc.moveDown(0.1)
-                  doc.fontSize(9)
+                  doc.fontSize(11)
                   doc.fillColor('#7c4399')
+                  doc.font('Times-Bold')
                   doc.text (school.name ,{
                     width: 412,
                     indent: 5,
@@ -255,6 +337,7 @@ module.exports = {
                   doc.fillColor('black')
                   doc.moveDown(0.1)
                   doc.fontSize(9)
+                  doc.font('Times-Roman')
                   doc.text ("GED",{
                     width: 412,
                     indent: 10,
@@ -265,8 +348,9 @@ module.exports = {
               }
               if(school.college){
                 doc.moveDown(0.1)
-                doc.fontSize(9)
+                doc.fontSize(11)
                 doc.fillColor('#7c4399')
+                doc.font('Times-Bold')
                 doc.text (school.name ,{
                   width: 412,
                   indent: 5,
@@ -275,6 +359,7 @@ module.exports = {
                 })
 
                 doc.fillColor('black')
+                doc.font('Times-Roman')
                 doc.text (school.certificate ,{
                   width: 412,
                   indent: 10,
@@ -295,6 +380,23 @@ module.exports = {
               console.log(school)
             }
           }
+        }
+
+        let ref = client.Reference
+        if(ref != null){
+          doc.moveDown(0.5)
+          doc.rect(30, doc.y - 2, 500, 16).fillAndStroke('#E3E3E3', '#7c4399')
+          doc.fillColor('#7c4399')
+          doc.fontSize(12)
+          doc.font('Times-Roman')
+          doc.text ("References", 35, (doc.y + 1) ,{
+            width: (doc.page.width/2),
+            align: 'left',
+            ellipsis: true
+          })
+          doc.fillColor('black')
+          doc.moveDown(0.5)
+          doc.text(ref.name)
         }
 
         doc.pipe(res)

@@ -23,7 +23,7 @@ module.exports = (passport)=>{
             if(user !== null && user !== undefined){
                 user.authenticate(password).then((res)=>{
                     if(res){
-                        return done(null, user);
+                        return done(null, user, {message: 'valid credentials.'});
                     } else {
                         return done(null, false, {message: 'Invalid credentials.'});
                     }
