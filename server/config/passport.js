@@ -2,6 +2,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../models').User;
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
 
 module.exports = (passport)=>{
     passport.serializeUser((user, done)=>{

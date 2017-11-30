@@ -10,6 +10,7 @@ class ClientData extends Component {
     super(props);
     this.getClients = this.getClients.bind(this);
     this.downResume = this.downResume.bind(this);
+    this.downForm = this.downForm.bind(this);
     this.state = {
       clientData: [],
     }
@@ -43,12 +44,43 @@ class ClientData extends Component {
       method: 'GET'
     })
     .then((response) => {
-      //console.log(response.headers)
+      if (response.status === 400) {
+        alert("ERROR ON DOWNLOAD")
+        return "ERROR"
+      }
+      return response.blob()
+    })
+    .then((responseBlob) => {
+      if(responseBlob === "ERROR"){
+        return
+      }
+      FileSaver.saveAs(responseBlob, firstName + "_" + lastName + "_Resume");
+    });
+  };
+
+  downForm = (id, firstName, lastName) =>{
+    fetch(`api/pdf/form/${id}`, {
+      headers: {
+        'Accept': 'application/pdf',
+        'Content-Type': 'application/pdf',
+        'Authorization': 'JWT '+localStorage.getItem("token")
+      },
+      method: 'GET',
+    })
+    .then((response) => {
+      if (response.status === 400) {
+        alert("ERROR ON DOWNLOAD")
+        return "ERROR"
+      }
+      //console.log(JSON.stringify(response))
       return response.blob()
     })
     .then((responseBlob) => {
       //console.log(response.body)
-       FileSaver.saveAs(responseBlob, firstName + "_" + lastName + "_Resume");
+      if(responseBlob === "ERROR"){
+        return
+      }
+       FileSaver.saveAs(responseBlob, lastName + "_de1277");
     });
   };
 
@@ -72,6 +104,7 @@ class ClientData extends Component {
               >View</NavLink>
         </td>
         <td><button onClick={()=>this.downResume(item.id, item.first_name, item.last_name)}> Download Resume </button></td>
+        <td><button onClick={()=>this.downForm(item.id, item.first_name, item.last_name)}> Download Form </button></td>
       </tr>
     ))
 
@@ -86,6 +119,7 @@ class ClientData extends Component {
               <th>DOB</th>
               <th>View</th>
               <th>Download PDF</th>
+              <th>Download Form</th>
             </tr>
           </thead>
           <tbody id="client-table-body">
