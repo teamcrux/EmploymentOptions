@@ -20,6 +20,28 @@ module.exports = {
     // create Days of Week JSON
     const daysOfWeekJSON = getDaysOfWeekJSON(formData);
 
+    return Client.create({
+      first_name: formData.fname,
+      last_name: formData.lname,
+      registration_date: date,
+      createdAt: date,
+      updatedAt: date,
+    }).then(client => { res.status(201).send(client); })
+      .catch(error => res.status(400).send(error));
+  },
+    
+
+
+
+
+
+
+
+
+
+
+
+    /*
     // create client address
     Address.create({
       street_address_one: formData.street1,
@@ -231,9 +253,8 @@ module.exports = {
             res.status(201).send(client);
           })
           .catch(error => res.status(400).send(error));
-
     });
-  },
+  },*/
 
   getAll(req, res) {
     return Client

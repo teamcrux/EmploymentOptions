@@ -34,7 +34,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Create Super User
-//require('./server/config/superuser');
+require('./server/config/superuser');
 
 // Login
 app.post('/login', passport.authenticate('local-login'), (req, res, next)=>{

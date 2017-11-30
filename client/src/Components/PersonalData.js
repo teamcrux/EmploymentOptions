@@ -26,10 +26,10 @@ const personalData = (props) => {
       </div>
       <div>
         <h3> Address </h3>
-        <p> Street: {props.user.Address.street_address_one} </p>
-        <p> Apt #: {props.user.Address.apt_num} </p>
-        <p> City: {props.user.Address.city} </p>
-        <p> State: {props.user.Address.state} </p>
+        <p> Street: {/*props.user.Address.street_address_one*/} </p>
+        <p> Apt #: {/*props.user.Address.apt_num*/} </p>
+        <p> City: {/*props.user.Address.city*/} </p>
+        <p> State: {/*props.user.Address.state*/} </p>
       </div>
       {AltContacts}
     </div>
