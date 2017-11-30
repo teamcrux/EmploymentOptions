@@ -43,7 +43,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      addressId: {
+      AddressId: {
         type: Sequelize.INTEGER,
         onDelete: 'SET NULL',
         references: {
