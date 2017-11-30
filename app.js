@@ -53,8 +53,8 @@ app.post('/login', passport.authenticate('local-login'), (req, res, next)=>{
 });
 
 // Require our router into the application.
-//app.use('/api', passport.authenticate('jwt', {session: false}) ,routes);
-app.use('/api', routes);
+app.use('/api', passport.authenticate('jwt', {session: false}) ,routes);
+//app.use('/api', routes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
