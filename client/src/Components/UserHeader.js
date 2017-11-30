@@ -25,7 +25,8 @@ class UserHeader extends React.Component {
       .then((response) => response.json())
       .then((responseJson) => {
         _this.setState({
-          name: responseJson.first_name
+          first_name: responseJson.first_name,
+          last_name: responseJson.last_name
         })
       })
       .catch((error) => {
@@ -39,7 +40,7 @@ class UserHeader extends React.Component {
           <div className="logo-wrapper">
             <img src={logo} alt="Employment Options" />
           </div>
-          <h1>Hi, {this.state.name}</h1>
+          <h1>Employment Options Database</h1>
         </div>
     );
   }

@@ -25,7 +25,6 @@ class LoginForm  extends Component {
 			body: JSON.stringify(formData)
 		})
 		.then((res)=> {
-			print(res)
 			return res.json();
 		})
 		.then((login) => {

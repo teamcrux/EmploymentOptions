@@ -2,20 +2,20 @@
 
 server {
    listen       80;
-   server_name  teamcruxtest.lucasmurphey.com
-   server_name  www.teamcruxtest.lucasmurphey.com;
-   return       301 https://teamcruxtest.lucasmurphey.com$request_uri;
+   server_name  app.eo.careers;
+   server_name  www.app.eo.careers;
+   return       301 https://app.eo.careers$request_uri;
 }
 
 server {
    listen 443;
 
-   server_name teamcruxtest.lucasmurphey.com
-   server_name www.teamcruxtest.lucasmurphey.com;
+   server_name app.eo.careers;
+   server_name www.app.eo.careers;
 
    ssl on;
-   ssl_certificate /etc/letsencrypt/live/teamcruxtest.lucasmurphey.com/fullchain.pem;
-   ssl_certificate_key /etc/letsencrypt/live/teamcruxtest.lucasmurphey.com/privkey.pem;
+   ssl_certificate /etc/letsencrypt/live/app.eo.careers/fullchain.pem;
+   ssl_certificate_key /etc/letsencrypt/live/app.eo.careers/privkey.pem;
 
    ssl_session_timeout 5m;
 

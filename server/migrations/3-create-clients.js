@@ -163,7 +163,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      addressId: {
+      AddressId: {
         type: Sequelize.INTEGER,
         onDelete: 'SET NULL',
         references: {
@@ -171,7 +171,7 @@ module.exports = {
           key: 'id'
         },
       },
-      jobDeveloperId: {
+      JobDeveloperId: {
         type: Sequelize.INTEGER,
         onDelete: 'SET NULL',
         references: {

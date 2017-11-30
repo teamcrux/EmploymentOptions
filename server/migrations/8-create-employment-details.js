@@ -43,7 +43,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      clientId: {
+      ClientId: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
