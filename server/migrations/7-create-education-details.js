@@ -51,7 +51,7 @@ module.exports = {
           key: 'id'
         },
       },
-      clientId: {
+      ClientId: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
