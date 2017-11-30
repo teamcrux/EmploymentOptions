@@ -2,6 +2,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../models').User;
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
 
 module.exports = (passport)=>{
     passport.serializeUser((user, done)=>{
@@ -23,7 +25,7 @@ module.exports = (passport)=>{
             if(user !== null && user !== undefined){
                 user.authenticate(password).then((res)=>{
                     if(res){
-                        return done(null, user);
+                        return done(null, user, {message: 'valid credentials.'});
                     } else {
                         return done(null, false, {message: 'Invalid credentials.'});
                     }
