@@ -5,6 +5,8 @@ const jobDevelopers = require('./jobDevelopers');
 const clients = require('./clients');
 const employmentdetail = require('./employmentdetail');
 const pdf = require('./pdf');
+const occupationdata = require('./occupationdata');
+const taskdata = require('./taskdata');
 
 
 module.exports = {
@@ -14,5 +16,7 @@ module.exports = {
   jobDevelopers,
   clients,
   employmentdetail,
-  pdf
+  pdf,
+  occupationdata,
+  taskdata
 };
