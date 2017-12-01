@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import './App.css';
 import MasterForm from './Components/MasterForm.js';
+import NewClient from './Components/NewClient.js';
 import ClientData from './Components/ClientData.js';
 import LoginForm from './Components/LoginForm';
 import Logout from './Components/Logout';
@@ -45,6 +46,7 @@ class App extends Component {
             <div className="container text-center">
               <Route exact path="/" render={(props)=>{return (<LoginForm logIn={this.logIn} />)}} />
               <Route path="/masterform" component={MasterForm} />
+              <Route path="/newclient" component={NewClient} />
               <Route path="/clients" component={ClientData} />
               <Route path="/logout" component={Logout} />
               <Route path="/createUser" component={CreateUser} />

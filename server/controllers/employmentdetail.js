@@ -2,7 +2,9 @@ const EmploymentDetail = require('../models').EmploymentDetail;
 
 module.exports = {
   create(req,res) {
-    let formData = req.body.experience[0];
+    console.log("Creating New EmploymentDetail");
+    let date = new Date();
+    let formData = req.body;
     let client_id = req.body.id;
     let tasksJSON = JSON.stringify(formData.tasks);
 
@@ -18,7 +20,9 @@ module.exports = {
         leaving_reason: formData.reason_left,
         start: formData.emp_start,
         end: formData.emp_end,
-        ClientId: client_id
+        ClientId: client_id,
+        createdAt: date,
+        updatedAt: date
       })
       .then(newJob => res.status(200).send(JSON.stringify(newJob)));
   }
