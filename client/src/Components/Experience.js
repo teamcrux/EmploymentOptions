@@ -2,16 +2,18 @@ import React from 'react';
 import { Field, FieldArray } from 'redux-form';
 import renderTask from './JobTasks'
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
-  <div className="section">
-    <label>{label}</label>
-    <div>
-      <input {...input} type={type} placeholder={label}/>
-      {touched && error && <span>{error}</span>}
+const renderField = ({ input, label, type, meta: { touched, error }}) => {
+  return (
+    <div className="section">
+      <label>{label}</label>
+      <div>
+        <input {...input} type={type} placeholder={label}/>
+        {touched && error && <span>{error}</span>}
+      </div>
     </div>
-  </div>
-);
+  );
 
+}
 
 const renderExperience = ({ fields, meta: { touched, error } }) => {
   return (
@@ -27,12 +29,14 @@ const renderExperience = ({ fields, meta: { touched, error } }) => {
             name={`${experience}.org_name`}
             type="text"
             component={renderField}
-            label="Organization"/>
+            label="Organization"
+            />
           <Field
             name={`${experience}.pos_name`}
             type="text"
             component={renderField}
-            label="Position"/>
+            label="Position"
+            />
           <Field
             name={`${experience}.loc`}
             type="text"
