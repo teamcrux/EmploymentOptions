@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     hs_diploma: { type: DataTypes.BOOLEAN },
     certificate: { type: DataTypes.STRING },
     diploma_type: { type: DataTypes.STRING },
-    start_date: { type: Sequelize.STRING },
-    end_date: { type: Sequelize.STRING },
+    start_date: { type: DataTypes.STRING },
+    end_date: { type: DataTypes.STRING },
     notes: { type: DataTypes.TEXT }
   }, {
     classMethods: {

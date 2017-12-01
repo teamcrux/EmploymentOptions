@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     leaving_reason_explain: { type: DataTypes.STRING },
     start: { type: DataTypes.DATEONLY },
     end: { type: DataTypes.DATEONLY },
-    difficulties: { type: Sequelize.BOOLEAN },
-    difficulties_explain: { type: Sequelize.STRING },
-    full_time: { type: Sequelize.BOOLEAN },
-    part_time: { type: Sequelize.BOOLEAN },
+    difficulties: { type: DataTypes.BOOLEAN },
+    difficulties_explain: { type: DataTypes.STRING },
+    full_time: { type: DataTypes.BOOLEAN },
+    part_time: { type: DataTypes.BOOLEAN },
   }, {
     classMethods: {
       associate: (models) => {
