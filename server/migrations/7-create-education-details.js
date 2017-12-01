@@ -8,33 +8,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING
-      },
-      college: {
-        type: Sequelize.BOOLEAN
-      },
-      high_school: {
-        type: Sequelize.BOOLEAN
-      },
-      vocational: {
-        type: Sequelize.BOOLEAN
-      },
-      ged: {
-        type: Sequelize.BOOLEAN
-      },
-      hs_diploma: {
-        type: Sequelize.BOOLEAN
-      },
-      certificate: {
-        type: Sequelize.STRING
-      },
-      diploma_type: {
-        type: Sequelize.STRING
-      },
-      notes: {
-        type: Sequelize.TEXT
-      },
+      name: { type: Sequelize.STRING },
+      college: { type: Sequelize.BOOLEAN },
+      high_school: { type: Sequelize.BOOLEAN },
+      vocational: { type: Sequelize.BOOLEAN },
+      ged: { type: Sequelize.BOOLEAN },
+      hs_diploma: { type: Sequelize.BOOLEAN },
+      certificate: { type: Sequelize.STRING },
+      diploma_type: { type: Sequelize.STRING },
+      start_date: { type: Sequelize.STRING },
+      end_date: { type: Sequelize.STRING },
+      notes: { type: Sequelize.TEXT },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -43,7 +27,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      addressId: {
+      AddressId: {
         type: Sequelize.INTEGER,
         onDelete: 'SET NULL',
         references: {
@@ -51,7 +35,7 @@ module.exports = {
           key: 'id'
         },
       },
-      clientId: {
+      ClientId: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
