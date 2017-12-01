@@ -89,6 +89,8 @@ class JobData extends React.Component {
   render () {
     let employmentdetail = this.props.user.EmploymentDetails;
     const {handleSubmit, pristine, submitting } = this.props;
+    const JobList = null;
+    /*
     const JobList = employmentdetail.map(item => (
       <tr>
         <td> {item.organization} </td>
@@ -103,6 +105,7 @@ class JobData extends React.Component {
 
       </tr>
     ));
+    */
 
     const taskInputs = this.state.tasks.map(task => (
       <label>

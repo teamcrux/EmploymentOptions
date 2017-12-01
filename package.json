@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"export NODE_ENV=test && env PORT=3001 nodemon ./bin/www\" \"npm run dev_client\"",
+    "dev": "concurrently \"export NODE_ENV=development && env PORT=3001 nodemon ./bin/www\" \"npm run dev_client\"",
     "dev_client": "cd client && npm start",
     "start": "node ./bin/www",
     "build": "cd client && npm run build && cd .. && cp -r ./client/build/* ./public",
@@ -30,6 +30,7 @@
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0",
+    "pdffiller": "0.0.10",
     "pdfkit": "^0.8.3",
     "pg": "^6.1.5",
     "pg-hstore": "^2.3.2",
