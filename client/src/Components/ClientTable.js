@@ -34,6 +34,114 @@ class ClientData extends Component {
     });
   };
 
+  getClientsSorted_LastName = () =>{
+    fetch("/api/clients", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'JWT '+localStorage.getItem("token")
+      },
+      method: 'GET'
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        clientData: responseJson,
+        fetchDone: true,
+      });
+    });
+  };
+
+  getClientsSorted_LastNameReverse = () =>{
+    fetch("/api/clients", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'JWT '+localStorage.getItem("token")
+      },
+      method: 'GET'
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        clientData: responseJson,
+        fetchDone: true,
+      });
+    });
+  };
+
+  getClientsSorted_FirstName = () =>{
+    fetch("/api/clients", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'JWT '+localStorage.getItem("token")
+      },
+      method: 'GET'
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        clientData: responseJson,
+        fetchDone: true,
+      });
+    });
+  };
+
+  getClientsSorted_FirstNameReverse = () =>{
+    fetch("/api/clients", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'JWT '+localStorage.getItem("token")
+      },
+      method: 'GET'
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        clientData: responseJson,
+        fetchDone: true,
+      });
+    });
+  };
+
+  getClientsSorted_Date = () =>{
+    fetch("/api/clients", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'JWT '+localStorage.getItem("token")
+      },
+      method: 'GET'
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        clientData: responseJson,
+        fetchDone: true,
+      });
+    });
+  };
+
+  getClientsSorted_DateReverse = () =>{
+    fetch("/api/clients", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'JWT '+localStorage.getItem("token")
+      },
+      method: 'GET'
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        clientData: responseJson,
+        fetchDone: true,
+      });
+    });
+  };
+
   downResume = (id, firstName, lastName) =>{
     fetch(`/api/pdf/${id}`, {
       headers: {
@@ -90,21 +198,15 @@ class ClientData extends Component {
 
   render() {
 
-    console.log("inside render", this.state.clientData);
     const persons = this.state.clientData.map(item => (
       <tr>
-        <td> {moment(item.registration_date).format('MM/DD/YY')} </td>
-        <td> {item.first_name} </td>
         <td> {item.last_name} </td>
-        <td> {item.dob} </td>
-        <td>
-          <NavLink id="toUser"
-              to={`/user/${item.id}`}
-              activeClassName="selected"
-              >View</NavLink>
-        </td>
+        <td> {item.first_name} </td>
+        <td><NavLink id="toUser" to={`/user/${item.id}`} activeClassName="selected"><button>View Profile</button></NavLink></td>
         <td><button onClick={()=>this.downResume(item.id, item.first_name, item.last_name)}> Download Resume </button></td>
         <td><button onClick={()=>this.downForm(item.id, item.first_name, item.last_name)}> Download Form </button></td>
+        <td> {moment(item.registration_date).format('MM/DD/YY')} </td>
+        <td> {item.updatedAt} </td>
       </tr>
     ))
 
@@ -112,14 +214,20 @@ class ClientData extends Component {
       <div className="clients-table">
         <table>
           <thead>
+<<<<<<< HEAD
             <tr>
               <th>Reg.Date</th>
               <th>First Name</th>
+=======
+            <tr>    
+>>>>>>> c0f6acd271fb3cf8334bc071fcd3506ae50412c3
               <th>Last Name</th>
-              <th>DOB</th>
-              <th>View</th>
-              <th>Download PDF</th>
-              <th>Download Form</th>
+              <th>First Name</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th>Reg. Date</th>
+              <th>Last Updated</th>
             </tr>
           </thead>
           <tbody id="client-table-body">

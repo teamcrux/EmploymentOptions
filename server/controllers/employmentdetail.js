@@ -2,7 +2,8 @@ const EmploymentDetail = require('../models').EmploymentDetail;
 
 module.exports = {
   create(req,res) {
-    let formData = req.body.experience[0];
+    console.log(req.body);
+    let formData = req.body;
     let client_id = req.body.id;
     let tasksJSON = JSON.stringify(formData.tasks);
 
