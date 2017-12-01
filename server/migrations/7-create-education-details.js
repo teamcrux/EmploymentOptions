@@ -43,7 +43,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      addressId: {
+      AddressId: {
         type: Sequelize.INTEGER,
         onDelete: 'SET NULL',
         references: {
@@ -51,7 +51,7 @@ module.exports = {
           key: 'id'
         },
       },
-      clientId: {
+      ClientId: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
