@@ -113,7 +113,7 @@ class ClientData extends Component {
         <table>
           <thead>
             <tr>
-              <th>Reg. Date</th>
+              <th>Reg.Date</th>
               <th>First Name</th>
               <th>Last Name</th>
               <th>DOB</th>

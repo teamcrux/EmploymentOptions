@@ -20,28 +20,17 @@ module.exports = {
     // create Days of Week JSON
     const daysOfWeekJSON = getDaysOfWeekJSON(formData);
 
-    return Client.create({
+    /*return Client.create({
       first_name: formData.fname,
       last_name: formData.lname,
       registration_date: date,
       createdAt: date,
-      updatedAt: date,
+      UpdatedAt: date,
     }).then(client => { res.status(201).send(client); })
       .catch(error => res.status(400).send(error));
-  },
-    
+  },*/
 
 
-
-
-
-
-
-
-
-
-
-    /*
     // create client address
     Address.create({
       street_address_one: formData.street1,
@@ -254,9 +243,10 @@ module.exports = {
           })
           .catch(error => res.status(400).send(error));
     });
-  },*/
+  },
 
   getAll(req, res) {
+    console.log("HERE")
     return Client
         .all()
         .then(clients => res.status(200).send(JSON.stringify(clients)))
@@ -265,14 +255,14 @@ module.exports = {
 
   getOne(req, res) {
     return Client
-        .findByPrimary(req.params.clientId)
-        .then(client => {
-          if (!client) {
+        .findByPrimary(req.params.ClientId)
+        .then(Client => {
+          if (!Client) {
             return res.status(404).send({
               message: 'Client Not Found'
             });
           }
-          return res.status(200).send(client);
+          return res.status(200).send(Client);
         })
         .catch(error => res.status(400).send(error));
   },
@@ -281,20 +271,20 @@ module.exports = {
     return Client
         .findOne({
           where: {
-            id: req.params.clientId
+            id: req.params.ClientId
           },
           include: [{
             all: true,
             nested: true,
             required: false
           }]
-        }).then(client => {
-          if (!client) {
+        }).then(Client => {
+          if (!Client) {
             return res.status(404).send({
               message: 'Client Not Found'
             });
           }
-          return res.status(200).send(client);
+          return res.status(200).send(Client);
         })
         .catch(error => res.status(400).send(error));
   },

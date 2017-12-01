@@ -168,7 +168,7 @@ class Lucas_ClientData extends Component {
         <td> {item.first_name} </td>
         <td><NavLink id="toUser" to={`/lucas/user/${item.id}`} activeClassName="selected"><button>View Profile</button></NavLink></td>
         <td><button onClick={()=>this.downResume(item.id, item.first_name, item.last_name)}> Download Resume </button></td>
-        <td> {item.updatedAt} </td>
+        <td> {item.UpdatedAt} </td>
       </tr>
     ))
 
