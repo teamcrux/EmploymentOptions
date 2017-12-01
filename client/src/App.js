@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 // import './App.css';
 import MasterForm from './Components/MasterForm.js';
+import NewClient from './Components/NewClient.js';
 import ClientData from './Components/ClientData.js';
+import Lucas_ClientData from './Components/Lucas_ClientData.js';
 import LoginForm from './Components/LoginForm';
 import Logout from './Components/Logout';
 import CreateUser from './Components/CreateUser';
 import UserProfile from './Components/UserProfile';
+import Lucas_UserProfile from './Components/Lucas_UserProfile';
 
 import {
   BrowserRouter as Router,
@@ -45,10 +48,13 @@ class App extends Component {
             <div className="container text-center">
               <Route exact path="/" render={(props)=>{return (<LoginForm logIn={this.logIn} />)}} />
               <Route path="/masterform" component={MasterForm} />
+              <Route path="/newclient" component={NewClient} />
               <Route path="/clients" component={ClientData} />
+              <Route path="/lucas_clients" component={Lucas_ClientData} />
               <Route path="/logout" component={Logout} />
               <Route path="/createUser" component={CreateUser} />
               <Route path="/user/:id" component={UserProfile} />
+              <Route path="/lucas/user/:id" component={Lucas_UserProfile} />
             </div>
           </div>
         </Router>
