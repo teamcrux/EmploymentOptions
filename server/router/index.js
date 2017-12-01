@@ -5,6 +5,8 @@ const userTypes = require('./routes/userTypes');
 const jobDevelopers = require('./routes/jobDevelopers');
 const clients = require('./routes/clients');
 const employmentdetail = require('./routes/employmentdetail');
+const occupationdata = require('./routes/occupationdata');
+const taskdata = require('./routes/taskdata');
 const pdf = require('./routes/pdf');
 const passport = require('passport');
 require('../config/passport')(passport);
@@ -34,7 +36,10 @@ router.use('/employmentdetail', employmentdetail);
 // PDFs
 router.use('/pdf', pdf);
 
-// PDFs
-router.use('/pdf', pdf);
+// occupationdata
+router.use('/occupation', occupationdata);
+
+// taskdata
+router.use('/task', taskdata);
 
 module.exports = router;
