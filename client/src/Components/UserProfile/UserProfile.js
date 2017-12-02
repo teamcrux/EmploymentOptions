@@ -222,12 +222,12 @@ class UserProfile extends React.Component {
         <div className="container flexbox">
           <UserNavBar />
           <div className="master-form">
-            <h2>Client: {this.state.userDetails.first_name} {this.state.userDetails.last_name}</h2>
+            <h2>Client: {this.state.userDetails.first_name}  {this.state.userDetails.last_name}</h2>
             
             {/* Personal Info */}
             <div>
               <h3>
-                Personal Information
+                Personal Information --------    
                 {!this.state.EditClientPersonal && <button onClick={(e) => this.editSection("ClientPersonal")}>Edit</button>}
                 {this.state.EditClientPersonal && <button onClick={(e) => this.getUser()}>Cancel</button>}
               </h3>
@@ -235,6 +235,34 @@ class UserProfile extends React.Component {
                 <div>
                   <p>First Name: {this.state.userDetails.first_name}</p>
                   <p>Last Name: {this.state.userDetails.last_name}</p>
+                  <p>middle_name: {this.state.userDetails.middle_name}</p>
+                  <p>preferred_name: {this.state.userDetails.preferred_name}</p>
+                  <p>previous_last_name: {this.state.userDetails.previous_last_name}</p>
+                  <p>dob: {this.state.userDetails.dob}</p>
+                  <p>email: {this.state.userDetails.email}</p>
+                  <p>gender: {this.state.userDetails.gender}</p>
+                  <p>ssn: {this.state.userDetails.ssn}</p>
+                  <p>phone: {this.state.userDetails.phone}</p>
+                  <p>phone_type: {this.state.userDetails.phone_type}</p>
+                  <p>phone2_number: {this.state.userDetails.phone2_number}</p>
+                  <p>phone2_type: {this.state.userDetails.phone2_type}</p>
+                  <p>race: {this.state.userDetails.race}</p>
+                  <p>race_other_explain: {this.state.userDetails.race_other_explain}</p>
+                  <p>primary_language: {this.state.userDetails.primary_language}</p>
+                  <p>language_counselor_notes: {this.state.userDetails.language_counselor_notes}</p>
+                  <p>prior_client: {this.state.userDetails.prior_client}</p>
+                  <p>prior_client_explain: {this.state.userDetails.prior_client_explain}</p>
+                  <p>us_citizen: {this.state.userDetails.us_citizen}</p>
+                  <p>work_permit: {this.state.userDetails.work_permit}</p>
+                  <p>contacts_counselor_notes: {this.state.userDetails.contacts_counselor_notes}</p>
+                  <p>living_situation: {this.state.userDetails.living_situation}</p>
+                  <p>marital_status: {this.state.userDetails.marital_status}</p>
+                  <p>living_with_you_self_only: {this.state.userDetails.living_with_you_self_only}</p>
+                  <p>living_with_you_partner_children: {this.state.userDetails.living_with_you_partner_children}</p>
+                  <p>living_with_you_parents: {this.state.userDetails.living_with_you_parents}</p>
+                  <p>living_with_you_other: {this.state.userDetails.living_with_you_other}</p>
+                  <p>living_with_you_other_explain: {this.state.userDetails.living_with_you_other_explain}</p>
+                  <p>who_reffered_you: {this.state.userDetails.who_reffered_you}</p>
                 </div>
               }
               {this.state.EditClientPersonal && <ClientPersonalEdit user={this.state.userDetails} makeEdit={this.editMade}/> }
@@ -244,7 +272,7 @@ class UserProfile extends React.Component {
             {/* Income Info */}
             <div>
               <h3>
-                Income Information
+                Income Information --------    
                 {!this.state.EditClientIncome && <button onClick={(e) => this.editSection("ClientIncome")}>Edit</button>}
                 {this.state.EditClientIncome && <button onClick={(e) => this.getUser()}>Cancel</button>}
               </h3>
@@ -261,7 +289,7 @@ class UserProfile extends React.Component {
             {/* Insurance Info */}
             <div>
               <h3>
-                Insurance Information
+                Insurance Information --------    
                 {!this.state.EditClientInsurance && <button onClick={(e) => this.editSection("ClientInsurance")}>Edit</button>}
                 {this.state.EditClientInsurance && <button onClick={(e) => this.getUser()}>Cancel</button>}
               </h3>
@@ -277,7 +305,7 @@ class UserProfile extends React.Component {
             {/* Employment Info */}
             <div>
               <h3>
-                Employment Information
+                Employment Information --------    
                 {!this.state.EditClientEmployment && <button onClick={(e) => this.editSection("ClientEmployment")}>Edit</button>}
                 {this.state.EditClientEmployment && <button onClick={(e) => this.getUser()}>Cancel</button>}
               </h3>
@@ -293,7 +321,7 @@ class UserProfile extends React.Component {
             {/* Disability Info */}
             <div>
               <h3>
-                Disability Information
+                Disability Information --------    
                 {!this.state.EditClientDisability && <button onClick={(e) => this.editSection("ClientDisability")}>Edit</button>}
                 {this.state.EditClientDisability && <button onClick={(e) => this.getUser()}>Cancel</button>}
               </h3>
@@ -309,7 +337,7 @@ class UserProfile extends React.Component {
             {/* Special Info */}
             <div>
               <h3>
-                Special Information
+                Special Information --------    
                 {!this.state.EditClientSpecial && <button onClick={(e) => this.editSection("ClientSpecial")}>Edit</button>}
                 {this.state.EditClientSpecial && <button onClick={(e) => this.getUser()}>Cancel</button>}
               </h3>
@@ -325,7 +353,7 @@ class UserProfile extends React.Component {
             {/* Additional Info */}
             <div>
               <h3>
-                Additional Information
+                Additional Information --------    
                 {!this.state.EditClientAdditional && <button onClick={(e) => this.editSection("ClientAdditional")}>Edit</button>}
                 {this.state.EditClientAdditional && <button onClick={(e) => this.getUser()}>Cancel</button>}
               </h3>
@@ -341,7 +369,7 @@ class UserProfile extends React.Component {
             {/* Education Info */}
             <div>
               <h3>
-                Education Information
+                Education Information --------    
                 {!this.state.EditClientEducation && <button onClick={(e) => this.editSection("ClientEducation")}>Edit</button>}
                 {this.state.EditClientEducation && <button onClick={(e) => this.getUser()}>Cancel</button>}
               </h3>
@@ -357,7 +385,7 @@ class UserProfile extends React.Component {
             {/* Medical Info */}
             <div>
               <h3>
-                Medical Information
+                Medical Information --------    
                 {!this.state.EditClientMedical && <button onClick={(e) => this.editSection("ClientMedical")}>Edit</button>}
                 {this.state.EditClientMedical && <button onClick={(e) => this.getUser()}>Cancel</button>}
               </h3>
