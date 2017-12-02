@@ -559,54 +559,281 @@ module.exports = {
         //pdfFillerData["Contact2_Relationship"] =
         //pdfFillerData["Contact2_Phone_Number"] =
         pdfFillerData["Counselor_Notes_2"] = client.contacts_counselor_notes
-        /*
+
+        if(client.marital_status == "Never"){
+          pdfFillerData["Marital_Status_Never"] = true
+        }else if(client.marital_status == "Married"){
+          pdfFillerData["Marital_Status_Married"] = true
+        }else if(client.marital_status == "Divorced"){
+          pdfFillerData["Marital_Status_Divorced"] = true
+        }else if(client.marital_status == "Seperated"){
+          pdfFillerData["Marital_Status_Seperated"] = true
+        }else if(client.marital_status == "Widowed"){
+          pdfFillerData["Marital_Status_Widowed"] = true
+        }else if(client.marital_status == "Domestic Partner"){
+          pdfFillerData["Marital_Status_Domestic_Partner"] = true
+        }
+
+        if(client.living_with_you_self_only){
+          pdfFillerData["Living_With_Self"] = true
+        }
+        if(client.living_with_you_partner_children){
+          pdfFillerData["Living_With_Partner_Children"] = true
+        }
+        if(client.living_with_you_parents){
+          pdfFillerData["Living_With_Parents"] = true
+        }
+        if(client.living_with_you_other){
+          pdfFillerData["Living_With_Other"] = true
+          pdfFillerData["Living_With_Other_Text_Box"] = client.living_with_you_other_explain
+        }
+
+        pdfFillerData["Referral_Person"] = client.who_reffered_you
+
+        pdfFillerData["SSI"] = client.income_SSI
+        pdfFillerData["SSDI"] = client.income_SSDI
+        pdfFillerData["TANF"] = client.income_TANF
+        pdfFillerData["SNAP"] = client.income_SNAP
+        pdfFillerData["subtotal"] = client.income_subtotal
+
+        pdfFillerData["Workers_Comp_Source"] = client.income_workers_comp_source
+        pdfFillerData["Workers_Comp_Veteran"] = client.income_veterans_source
+        pdfFillerData["Workers_Comp_Program"] = client.income_veterans_progam
+        pdfFillerData["Personal_Income_Source"] = client.income_personal_source
+        pdfFillerData["Other_Source"] = client.income_other_source
+        pdfFillerData["Income_Workers_Comp"] = client.income_workers_comp_amount
+        pdfFillerData["Income_Veteran"] = client.income_veterans_amount
+        pdfFillerData["Income_Personal"] = client.income_personal_amount
+        pdfFillerData["Income_Other"] = client.income_other_amount
+        pdfFillerData["Income_Total"] = client.income_total
+        pdfFillerData["Counselor_Notes_3"] = client.income_counselor_notes
+
+        /**********************************************
+        *
+        * Page 3/4
+        *
+        **********************************************/
+        pdfFillerData["Insurance_Medicaid"] = client.insurance_medicaid
+        pdfFillerData["Insurance_Private_Other"] = client.insurance_private_other
+        pdfFillerData["Insurance_Workers_Comp"] = client.insurance_workers_comp
+        pdfFillerData["Insurance_Medicare"] = client.insurance_medicare
+        pdfFillerData["Insurance_Private_Employer"] = client.insurance_private_employer
+        pdfFillerData["Insurance_None"] = client.insurance_none
+        pdfFillerData["Insurance_OHP"] = client.insurance_OHP
+        pdfFillerData["Insurance_Public"] = client.insurance_public
+        pdfFillerData["Counselor_Notes_4"] = client.insurance_counselor_notes
+
+        if(client.currently_employed){
+          pdfFillerData["Employed_Yes"] = true
+        }else{
+          pdfFillerData["Employed_No"] = true
+        }
+        pdfFillerData["Employed_Hours_Per_Week"] = client.current_hours_per_week
+        pdfFillerData["Employed_Salary"] = client.current_salary
+        pdfFillerData["Employed_Hourly_Wage"] = client.current_hourly_wage
+        if(client.current_seasonal_farm_worker){
+          pdfFillerData["Migrant_Farmer_Yes"] = true
+        } else{
+          pdfFillerData["Migrant_Farmer_No"] = true
+        }
+
+        //displays Employment Details(if any)
+        let exp = client.EmploymentDetails
+        if(exp != null){
+          for(var i = 0; i < exp.length; i++){
+            var job = exp[i]
+            if(i == 0){
+              pdfFillerData["Employer_1"] = job.organization
+              pdfFillerData["Job_Duties_1"] = job.description
+              pdfFillerData["Job_Title_1"] = job.job_title
+              if(job.difficulties){
+                pdfFillerData["Disability_1_Yes"] = true
+                pdfFillerData["Difficulties_1_Explanation"] = job.difficulties_explain
+              }else if(!job.difficulties){
+                pdfFillerData["Disability_1_No"] = true
+              }
+              pdfFillerData["Job_1_Salary"] = job.pay
+              pdfFillerData["Job_1_Start"] = (job.start.getMonth() + 1) + "/" + job.start.getDate() + "/" + job.start.getFullYear()
+              pdfFillerData["Job_1_End"] = (job.end.getMonth() + 1) + "/" + job.end.getDate() + "/" + job.end.getFullYear()
+              if(job.leaving_reason == "Terminated"){
+                pdfFillerData["Reason_For_Leaving_1_Terminated"] = true
+              }else if(job.leaving_reason == "Laid Off"){
+                pdfFillerData["Reason_For_Leaving_1_Laid_Off"] = true
+              }else if(job.leaving_reason == "Quit"){
+                pdfFillerData["Reason_For_Leaving_1_Quit"] = true
+              }else if(job.leaving_reason == "Relocated"){
+                pdfFillerData["Reason_For_Leaving_1_Relocated"] = true
+              }else{
+                pdfFillerData["Reason_For_Leaving_1_Other"] = true
+              }
+              pdfFillerData["Job_1_Reason_For_Leaving"] = job.leaving_reason_explain
+              if(job.full_time){
+                pdfFillerData["Job_1_Full_Time"] = true
+              }
+              if(job.part_time){
+                pdfFillerData["Job_1_Part_Time"] = true
+              }
+            }else if(i == 1){
+              pdfFillerData["Employer_2"] = job.organization
+              pdfFillerData["Job_Duties_2"] = job.description
+              pdfFillerData["Job_Title_2"] = job.job_title
+              if(job.difficulties){
+                pdfFillerData["Disability_2_Yes"] = true
+                pdfFillerData["Difficulties_2_Explanation"] = job.difficulties_explain
+              }else if(!job.difficulties){
+                pdfFillerData["Disability_2_No"] = true
+              }
+              pdfFillerData["Job_2_Salary"] = job.pay
+              pdfFillerData["Job_2_Start"] = (job.start.getMonth() + 1) + "/" + job.start.getDate() + "/" + job.start.getFullYear()
+              pdfFillerData["Job_2_End"] = (job.end.getMonth() + 1) + "/" + job.end.getDate() + "/" + job.end.getFullYear()
+              if(job.leaving_reason == "Terminated"){
+                pdfFillerData["Reason_For_Leaving_2_Terminated"] = true
+              }else if(job.leaving_reason == "Laid Off"){
+                pdfFillerData["Reason_For_Leaving_2_Laid_Off"] = true
+              }else if(job.leaving_reason == "Quit"){
+                pdfFillerData["Reason_For_Leaving_2_Quit"] = true
+              }else if(job.leaving_reason == "Relocated"){
+                pdfFillerData["Reason_For_Leaving_2_Relocated"] = true
+              }else{
+                pdfFillerData["Reason_For_Leaving_2_Other"] = true
+              }
+              pdfFillerData["Job_2_Reason_For_Leaving"] = job.leaving_reason_explain
+              if(job.full_time){
+                pdfFillerData["Job_2_Full_Time"] = true
+              }
+              if(job.part_time){
+                pdfFillerData["Job_2_Part_Time"] = true
+              }
+            }else if(i == 2){
+              pdfFillerData["Employer_3"] = job.organization
+              pdfFillerData["Job_Duties_3"] = job.description
+              pdfFillerData["Job_Title_3"] = job.job_title
+              if(job.difficulties){
+                pdfFillerData["Disability_3_Yes"] = true
+                pdfFillerData["Difficulties_3_Explanation"] = job.difficulties_explain
+              }else if(!job.difficulties){
+                pdfFillerData["Disability_3_No"] = true
+              }
+              pdfFillerData["Job_3_Salary"] = job.pay
+              pdfFillerData["Job_3_Start"] = (job.start.getMonth() + 1) + "/" + job.start.getDate() + "/" + job.start.getFullYear()
+              pdfFillerData["Job_3_End"] = (job.end.getMonth() + 1) + "/" + job.end.getDate() + "/" + job.end.getFullYear()
+              if(job.leaving_reason == "Terminated"){
+                pdfFillerData["Reason_For_Leaving_3_Terminated"] = true
+              }else if(job.leaving_reason == "Laid Off"){
+                pdfFillerData["Reason_For_Leaving_3_Laid_Off"] = true
+              }else if(job.leaving_reason == "Quit"){
+                pdfFillerData["Reason_For_Leaving_3_Quit"] = true
+              }else if(job.leaving_reason == "Relocated"){
+                pdfFillerData["Reason_For_Leaving_3_Relocated"] = true
+              }else{
+                pdfFillerData["Reason_For_Leaving_3_Other"] = true
+              }
+              pdfFillerData["Job_3_Reason_For_Leaving"] = job.leaving_reason_explain
+              if(job.full_time){
+                pdfFillerData["Job_3_Full_Time"] = true
+              }
+              if(job.part_time){
+                pdfFillerData["Job_3_Part_Time"] = true
+              }
+            }else if(i == 3){
+              pdfFillerData["Employer 4"] = job.organization
+              pdfFillerData["Job duties_4"] = job.description
+              pdfFillerData["Job title_4"] = job.job_title
+              pdfFillerData["Last salarypay rate_4"] = job.pay
+              pdfFillerData["Start date_4"] = (job.start.getMonth() + 1) + "/" + job.start.getDate() + "/" + job.start.getFullYear()
+              pdfFillerData["End date_4"] = (job.end.getMonth() + 1) + "/" + job.end.getDate() + "/" + job.end.getFullYear()
+            }else if(i == 4){
+              pdfFillerData["Employer 5"] = job.organization
+              pdfFillerData["Job duties_5"] = job.description
+              pdfFillerData["Job title_5"] = job.job_title
+              pdfFillerData["Last salarypay rate_5"] = job.pay
+              pdfFillerData["Start date_5"] = (job.start.getMonth() + 1) + "/" + job.start.getDate() + "/" + job.start.getFullYear()
+              pdfFillerData["End date_5"] = (job.end.getMonth() + 1) + "/" + job.end.getDate() + "/" + job.end.getFullYear()
+            }
+          }
+        }
+
+        pdfFillerData["Counselor notes_5"] = client.employment_counselor_notes
+
+        /**********************************************
+        *
+        * Page 5
+        *
+        **********************************************/
+
         if(client.military){
           pdfFillerData["Yes_Vet"] = true
+          if(client.injured_during_service){
+            pdfFillerData["Injured_During_Service_Yes"] = true
+          }else{
+            pdfFillerData["Injured_During_Service_No"] = true
+          }
+
+          if(client.receiving_VAVR_services){
+            pdfFillerData["VA_VR_Yes"] = true
+          }else{
+            pdfFillerData["VA_VR_No"] = true
+          }
         }else{
           pdfFillerData["No_Vet"] = true
         }
 
-        if(client.full_time){
-          pdfFillerData["Full_Time"] = true
-        }
-        if(client.part_time){
-          pdfFillerData["Part_Time"] = true
-        }
-        if(client.hours){
-          pdfFillerData["Part_Time_Hrs_Per_Week"] = client.hours.toString()
+        if(client.workers_comp_claim == "Yes"){
+          pdfFillerData["Workers_Comp_Claim_Yes"] = true
+        }else if(client.workers_comp_claim == "No"){
+          pdfFillerData["Workers_Comp_Claim_No"] = true
+        }else if(client.workers_comp_claim == "Pending"){
+          pdfFillerData["Workers_Comp_Claim_Pending"] = true
         }
 
-        if(client.drivers_license){
-          pdfFillerData["DL_Yes"] = true
+        pdfFillerData["Worker_Comp_Claim_State"] = client.workers_comp_claim_state
+
+        if(client.oregon_preffered_worker){
+          pdfFillerData["Oregon_Preferred_Worker_Yes"] = true
         }else{
-          pdfFillerData["DL_No"] = true
+          pdfFillerData["Oregon_Preferred_Worker_No"] = true
         }
 
-        if(client.car_access){
-          pdfFillerData["Car"] = true
-        }
+        pdfFillerData["Disability_Condition_1"] = client.condition1
+        pdfFillerData["DC_1_Year"] = client.condition1_year_onset
+        pdfFillerData["DC_1_Affect"] = client.condition1_how_affects
+        pdfFillerData["Disability_Condition_2"] = client.condition2
+        pdfFillerData["DC_2_Year"] = client.condition2_year_onset
+        pdfFillerData["DC_2_Affect"] = client.condition2_how_affects
+        pdfFillerData["Disability_Condition_3"] =client.condition3
+        pdfFillerData["DC_3_Year"] = client.condition3_year_onset
+        pdfFillerData["DC_3_Affect"] = client.condition3_how_affects
+        pdfFillerData["Disability_Condition_4"] = client.condition4
+        pdfFillerData["DC_4_Year"] = client.condition4_year_onset
+        pdfFillerData["DC_4_Affect"] =client.condition4_how_affects
+        pdfFillerData["DC_5_Affect"] = client.condition5_how_affects
+        pdfFillerData["DC_5_Yead"] = client.condition5_year_onset
+        pdfFillerData["Disability_Condition_5"] = client.condition5
+        pdfFillerData["Counselor_Notes_6"] = client.disability_counselor_notes
 
-        if(client.other_transport == "bus"){
-          pdfFillerData["Bus"] = true
-        }else if(client.other_transport == "bike"){
-          pdfFillerData["Bike"] = true
-        }else if(client.other_transport == "other"){
-          pdfFillerData["Other_10"] = true
-        }
 
+        pdfFillerData["Medication1"] = client.medication1
+        pdfFillerData["Medication2"] = client.medication2
+        pdfFillerData["Medication3"] = client.medication3
+        pdfFillerData["Medication4"] = client.medication4
+        pdfFillerData["Medication5"] = client.medication5
 
-        if(client.pass_drug_screen){
-          pdfFillerData["Pass_Drug_Test_Yes"] = true
+        pdfFillerData["Purpose1"] = client.medication1_purpose
+        pdfFillerData["Purpose2"] = client.medication2_purpose
+        pdfFillerData["Purpose3"] = client.medication3_purpose
+        pdfFillerData["Purpose4"] = client.medication4_purpose
+        pdfFillerData["Purpose5"] = client.medication5_purpose
+
+        /**********************************************
+        *
+        * Page 8/9
+        *
+        **********************************************/
+
+        if(client.high_school_graduate){
+          pdfFillerData["HS_Yes"] = true
         }else{
-          if(client.pass_drug_screen == false){
-            pdfFillerData["Pass_Drug_Test_Yes"] = true
-          }
-        }
-
-        if(client.felony || client.misdemeanor){
-          pdfFillerData["fel_mis_Yes"] = true
-        }else{
-          pdfFillerData["fel_mis_No"] = true
+          pdfFillerData["grade"] = client.highest_grade_completed
         }
         //currently 4 education rows so will only accept 4 education data points
         edu = client.EducationDetails
@@ -679,53 +906,10 @@ module.exports = {
         }
 
 
-        //displays Employment Details(if any)
-        let exp = client.EmploymentDetails
-        if(exp != null){
-          for(var i = 0; i < exp.length; i++){
-            var job = exp[i]
-            if(i == 0){
-              pdfFillerData["Employer 1"] = job.organization
-              pdfFillerData["Job duties"] = job.description
-              pdfFillerData["Job title"] = job.job_title
-              pdfFillerData["Last salarypay rate"] = job.pay
-              pdfFillerData["Start date"] = (job.start.getMonth() + 1) + "/" + job.start.getDate() + "/" + job.start.getFullYear()
-              pdfFillerData["End date"] = (job.end.getMonth() + 1) + "/" + job.end.getDate() + "/" + job.end.getFullYear()
-            }else if(i == 1){
-              pdfFillerData["Employer 2"] = job.organization
-              pdfFillerData["Job duties_2"] = job.description
-              pdfFillerData["Job title_2"] = job.job_title
-              pdfFillerData["Last salarypay rate_2"] = job.pay
-              pdfFillerData["Start date_2"] = (job.start.getMonth() + 1) + "/" + job.start.getDate() + "/" + job.start.getFullYear()
-              pdfFillerData["End date_2"] = (job.end.getMonth() + 1) + "/" + job.end.getDate() + "/" + job.end.getFullYear()
-            }else if(i == 2){
-              pdfFillerData["Employer 3"] = job.organization
-              pdfFillerData["Job duties_3"] = job.description
-              pdfFillerData["Job title_3"] = job.job_title
-              pdfFillerData["Last salarypay rate_3"] = job.pay
-              pdfFillerData["Start date_3"] = (job.start.getMonth() + 1) + "/" + job.start.getDate() + "/" + job.start.getFullYear()
-              pdfFillerData["End date_3"] = (job.end.getMonth() + 1) + "/" + job.end.getDate() + "/" + job.end.getFullYear()
-            }else if(i == 3){
-              pdfFillerData["Employer 4"] = job.organization
-              pdfFillerData["Job duties_4"] = job.description
-              pdfFillerData["Job title_4"] = job.job_title
-              pdfFillerData["Last salarypay rate_4"] = job.pay
-              pdfFillerData["Start date_4"] = (job.start.getMonth() + 1) + "/" + job.start.getDate() + "/" + job.start.getFullYear()
-              pdfFillerData["End date_4"] = (job.end.getMonth() + 1) + "/" + job.end.getDate() + "/" + job.end.getFullYear()
-            }else if(i == 4){
-              pdfFillerData["Employer 5"] = job.organization
-              pdfFillerData["Job duties_5"] = job.description
-              pdfFillerData["Job title_5"] = job.job_title
-              pdfFillerData["Last salarypay rate_5"] = job.pay
-              pdfFillerData["Start date_5"] = (job.start.getMonth() + 1) + "/" + job.start.getDate() + "/" + job.start.getFullYear()
-              pdfFillerData["End date_5"] = (job.end.getMonth() + 1) + "/" + job.end.getDate() + "/" + job.end.getFullYear()
-            }
-          }
-        }
+
 
 
         //This chunk gets the form field names to programatically fill out pdf
-*/
         var destinationPDF =  "uploads/test_complete.pdf";
 
         pdfParser = hummus.createReader(sourcePDF),
