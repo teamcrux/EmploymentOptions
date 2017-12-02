@@ -7,7 +7,7 @@ class SearchTasks extends React.Component {
       tasks: [],
     }
 
-    //console.log("inside search tasks", "/api/task/"+this.props.jobCode);
+    console.log("inside search tasks", "/api/task/"+this.props.jobCode);
     fetch("/api/task/"+this.props.jobCode, {
       headers: {
         'Accept': 'application/json',
@@ -18,7 +18,7 @@ class SearchTasks extends React.Component {
     })
     .then(res => res.json())
     .then(responseJson => {
-      //console.log(responseJson);
+      console.log(responseJson);
       this.setState({
         tasks: responseJson,
       })

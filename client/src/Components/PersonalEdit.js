@@ -1,8 +1,8 @@
 import React from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
-import ClientAdditionalForm from './ClientEditForms/ClientAdditionalForm';
+import Personal from './Personal';
 
-class ClientAdditionalEdit extends React.Component {
+class PersonalEdit extends React.Component {
   constructor(props){
     super(props);
     this.sendPatch = this.sendPatch.bind(this);
@@ -10,7 +10,7 @@ class ClientAdditionalEdit extends React.Component {
 
   sendPatch(formData) {
     formData.id = this.props.user.id;
-    //console.log("formData", formData);
+    console.log("formData", formData);
     fetch("/api/clients", {
       headers: {
         'Accept': 'application/json',
@@ -22,7 +22,7 @@ class ClientAdditionalEdit extends React.Component {
     })
     .then(res => res.json())
     .then(responseJson => {
-      //console.log("resp",responseJson);
+      console.log("resp",responseJson);
       this.props.makeEdit();
      });
   };
@@ -30,10 +30,10 @@ class ClientAdditionalEdit extends React.Component {
   render () {
 
     const {handleSubmit, pristine, submitting } = this.props;
-    //console.log(this.props.user);
+    console.log(this.props.user);
     return (
       <form onSubmit={handleSubmit(this.sendPatch)}>
-        <Field name="client-additional-form" component={ClientAdditionalForm}/>
+        <Field name="personal" component={Personal}/>
         <div className="submit-container">
           <button className="submit-button" type="submit" disabled={pristine || submitting}>Submit</button>
         </div>
@@ -42,4 +42,4 @@ class ClientAdditionalEdit extends React.Component {
   }
 };
 
-export default reduxForm({form:'ClientAdditionalEdit'})(ClientAdditionalEdit);
+export default reduxForm({form:'PersonalEdit'})(PersonalEdit);

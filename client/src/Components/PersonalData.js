@@ -42,9 +42,57 @@ const personalData = (props) => {
 
   return (
     <div>
+      <h2>Client: {props.user.first_name} {props.user.last_name}</h2>
+      <div>
+        <h3>Personal Information</h3>
+        
+      </div>
+      <div>
+        <h3>Income</h3>
+        
+      </div>
+      <div>
+        <h3>Insurance Information</h3>
+        
+      </div>
+      <div>
+        <h3>Employment Information</h3>
+        
+      </div>
+      <div>
+        <h3>Disability Information</h3>
+        
+      </div>
+      <div>
+        <h3>Special Programs</h3>
+        
+      </div>
+      <div>
+        <h3>Additional Information</h3>
+        
+      </div>
+      <div>
+        <h3>Education Information</h3>
+        
+      </div>
+      <div>
+        <h3>Medical Information:</h3>
+        
+      </div>
 
     <div>
-
+      <div>
+        <h3> Personal </h3>
+        <p> First Name: {props.user.first_name} </p>
+        <p> Last Name: {props.user.last_name} </p>
+        <p> Date of Birth: {props.user.dob} </p>
+        <p> Race: {props.user.race} </p>
+        <p> Gender: {props.user.gender} </p>
+        <p> Phone: {props.user.phone} </p>
+        <p> Email: {props.user.email} </p>
+        <p> SSN: {props.user.ssn} </p>
+        <p> ODL: {props.user.odl} </p>
+      </div>
       {Addresses}
       {AltContacts}
     </div>
