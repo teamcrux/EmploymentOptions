@@ -233,26 +233,26 @@ class UserProfile extends React.Component {
               </h3>
               {!this.state.EditClientPersonal &&
                 <div>
-                  <p>First Name: {this.state.userDetails.first_name}</p>
-                  <p>Last Name: {this.state.userDetails.last_name}</p>
-                  <p>middle_name: {this.state.userDetails.middle_name}</p>
-                  <p>preferred_name: {this.state.userDetails.preferred_name}</p>
-                  <p>previous_last_name: {this.state.userDetails.previous_last_name}</p>
-                  <p>dob: {this.state.userDetails.dob}</p>
-                  <p>email: {this.state.userDetails.email}</p>
-                  <p>gender: {this.state.userDetails.gender}</p>
-                  <p>ssn: {this.state.userDetails.ssn}</p>
-                  <p>phone: {this.state.userDetails.phone}</p>
-                  <p>phone_type: {this.state.userDetails.phone_type}</p>
-                  <p>phone2_number: {this.state.userDetails.phone2_number}</p>
-                  <p>phone2_type: {this.state.userDetails.phone2_type}</p>
-                  <p>race: {this.state.userDetails.race}</p>
-                  <p>race_other_explain: {this.state.userDetails.race_other_explain}</p>
-                  <p>primary_language: {this.state.userDetails.primary_language}</p>
-                  <p>language_counselor_notes: {this.state.userDetails.language_counselor_notes}</p>
-                  <p>prior_client: {this.state.userDetails.prior_client}</p>
-                  <p>prior_client_explain: {this.state.userDetails.prior_client_explain}</p>
-                  <p>us_citizen: {this.state.userDetails.us_citizen}</p>
+                  <p>First name *: {this.state.userDetails.first_name}</p>
+                  <p>Last name *:  {this.state.userDetails.last_name}</p>
+                  <p>Middle name:  {this.state.userDetails.middle_name}</p>
+                  <p>Preferred Name: {this.state.userDetails.preferred_name}</p>
+                  <p>Previous Last Name: {this.state.userDetails.previous_last_name}</p>
+                  <p>Birthdate: {this.state.userDetails.dob}</p>
+                  <p>Email address: {this.state.userDetails.email}</p>
+                  <p>Gender: gender: {this.state.userDetails.gender}</p>
+                  <p>Social Security Number: {this.state.userDetails.ssn}</p>
+                  <p>Phone Number: {this.state.userDetails.phone}</p>
+                  <p>Phone Type: {this.state.userDetails.phone_type}</p>
+                  <p>Second Phone Number: {this.state.userDetails.phone2_number}</p>
+                  <p>Second Phone Type: {this.state.userDetails.phone2_type}</p>
+                  <p>Race: {this.state.userDetails.race}</p>
+                  <p>race_other_explain {this.state.userDetails.race_other_explain}</p>
+                  <p>Primary Language: {this.state.userDetails.primary_language}</p>
+                  <p>(Counselor Notes: ) {this.state.userDetails.language_counselor_notes}</p>
+                  <p>Have you been a prior client of Vocational Rehabilitation? {this.state.userDetails.prior_client}</p>
+                  <p>If yes, when and where? {this.state.userDetails.prior_client_explain}</p>
+                  <p>Are you a US Citizen? {this.state.userDetails.us_citizen}</p>
                   <p>work_permit: {this.state.userDetails.work_permit}</p>
                   <p>contacts_counselor_notes: {this.state.userDetails.contacts_counselor_notes}</p>
                   <p>living_situation: {this.state.userDetails.living_situation}</p>
