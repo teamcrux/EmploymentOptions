@@ -29,7 +29,7 @@ class JobData extends React.Component {
     for (var i = 0; i < this.selectedTasks.size; i++) {
       formData.tasks.push(setItr.next().value[0]);
     }
-    console.log("formData", formData);
+    //console.log("formData", formData);
 
     fetch("/api/employmentdetail", {
       headers: {
@@ -42,13 +42,13 @@ class JobData extends React.Component {
     })
     .then(res => res.json())
     .then(responseJson => {
-      console.log("resp",responseJson);
+      //console.log("resp",responseJson);
       this.props.makeEdit();
      });
   };
 
   onSub(manualEntry){
-    console.log("adding manually", manualEntry);
+    //console.log("adding manually", manualEntry);
     var formData = manualEntry[0];
     formData.id = this.props.user.id;
     fetch("/api/employmentdetail", {
@@ -62,13 +62,13 @@ class JobData extends React.Component {
     })
     .then(res => res.json())
     .then(responseJson => {
-      console.log("resp",responseJson);
+      //console.log("resp",responseJson);
       this.props.makeEdit();
      });
   };
 
   setCode = (item) => {
-    console.log("inside set code:", item);
+    //console.log("inside set code:", item);
     this.setState({
       onetsoc_code:item.onetsoc_code,
       title:item.title,

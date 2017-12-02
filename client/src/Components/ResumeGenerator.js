@@ -2,7 +2,7 @@ export default function createResume (data) {
 
   var win;
   data = JSON.parse(data);
-  console.log(data);
+  //console.log(data);
 
   let getSkills = () => {
     var list = "<ul>"
@@ -36,7 +36,7 @@ export default function createResume (data) {
       list += "<h4><u>" + job.organization + ' - ' + job.location + ' - ' + job.job_title + "</u></h4>";
       list += job.description + "<br><br> TECHNICAL SKILLS:<br>"
       var duties = JSON.parse(job.job_duties);
-      console.log("duties: ", duties);
+      //console.log("duties: ", duties);
       for (var j = 0; j < duties.length; j++) {
         var obj = duties[j];
         if (j === 0) {
@@ -63,7 +63,7 @@ export default function createResume (data) {
     let edu = data.EducationDetails;
     for (var i = 0; i < edu.length; i++) {
       var school = edu[i];
-      console.log(school);
+      //console.log(school);
       if (school.high_school) {
         if(school.hs_diploma) {
           list += "High School Diploma - " + school.name;

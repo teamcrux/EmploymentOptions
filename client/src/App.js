@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 // import './App.css';
-import MasterForm from './Components/MasterForm.js';
+import MasterForm from './Components/oldMasterForm/MasterForm.js';
 import NewClient from './Components/NewClient.js';
-import ClientData from './Components/ClientData.js';
+import ClientsData from './Components/ClientsData.js';
 import LoginForm from './Components/LoginForm';
 import Logout from './Components/Logout';
 import CreateUser from './Components/CreateUser';
-import UserProfile from './Components/UserProfile';
+import UserProfile from './Components/UserProfile/UserProfile';
 
 import {
   BrowserRouter as Router,
@@ -47,7 +47,7 @@ class App extends Component {
               <Route exact path="/" render={(props)=>{return (<LoginForm logIn={this.logIn} />)}} />
               <Route path="/masterform" component={MasterForm} />
               <Route path="/newclient" component={NewClient} />
-              <Route path="/clients" component={ClientData} />
+              <Route path="/clients" component={ClientsData} />
               <Route path="/logout" component={Logout} />
               <Route path="/createUser" component={CreateUser} />
               <Route path="/user/:id" component={UserProfile} />
