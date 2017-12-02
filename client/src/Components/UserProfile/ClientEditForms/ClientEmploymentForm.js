@@ -13,6 +13,7 @@ const renderErrField = ({ input, label, type, meta: { touched, error } }) => (
 const ClientEmploymentForm = () => {
   return (
     <div className="section">
+      {/*
       <div>
         <label htmlFor="fname">First name *</label>
         <Field name="fname" component={renderErrField} type="text"/>
@@ -21,6 +22,7 @@ const ClientEmploymentForm = () => {
         <label htmlFor="lname">Last name *</label>
         <Field name="lname" component={renderErrField} type="text"/>
       </div>
+      */}
     </div>
   )
 }

@@ -101,8 +101,6 @@ class UserProfile extends React.Component {
         EditClientMedical: false
       })
     }
-
-    
     else if (section === "ClientInsurance") {
       this.setState({
         EditClientInsurance: true,
@@ -117,8 +115,6 @@ class UserProfile extends React.Component {
         EditClientMedical: false
       })
     }
-
-    /*
     else if (section === "ClientEmployment") {
       this.setState({
         EditClientEmployment: true,
@@ -203,7 +199,6 @@ class UserProfile extends React.Component {
         EditClientEducation: false
       })
     }
-    */
   }
 
   editMade = () => {
@@ -376,20 +371,10 @@ class UserProfile extends React.Component {
             </div>
 
             
-
-
-
-
-
-            {/*
-
-            
             <div>
-              
               {!this.state.EditClient && <JobData user={this.state.userDetails} makeEdit={this.editMade}/>}
-              
             </div>
-            */}
+            
 
               
           </div>
