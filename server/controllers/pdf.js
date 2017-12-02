@@ -2,14 +2,12 @@ const fs = require('fs');
 const hummus = require('hummus')
 const fillForm = require('./fillform').fillForm
 const PDFDigitalForm = require('./pdfparser')
-var pdfFiller = require('pdffiller')
 const Client = require('../models').Client;
 const Address = require('../models').Address;
 const AlternateContact = require('../models').AlternateContact;
 const EducationDetail = require('../models').EducationDetail;
 const EmploymentDetail = require('../models').EmploymentDetail;
 const Reference = require('../models').Reference;
-const pdf = require('../models').pdf;
 const PDFDocument = require('pdfkit');
 
 
@@ -19,12 +17,12 @@ module.exports = {
 
 
 
-  all(req, res) {
+  getResume(req, res) {
     //console.log(req.body);
     return Client
     .findOne({
       where: {
-        id: req.params.clientId
+        id: req.params.ClientId
       },
       include: [{
         all: true,
@@ -133,7 +131,7 @@ module.exports = {
 
           //console.log(skills.length);
           for (var i = 0; i < skills.length; i++) {
-            ////console.log(skills[i]['key_skill'])
+            //console.log(skills[i]['key_skill'])
             doc.moveDown(0.1)
             doc.fontSize(9)
             doc.text (skills[i]['key_skill'] ,{
@@ -413,25 +411,6 @@ module.exports = {
       .catch(error => res.status(400).send(error));
 
   },
-  /*getForm(req, res) {
-    //console.log(req.body);
-    return Client
-    .findOne({
-      where: {
-        id: req.params.clientId
-      },
-      include: [{
-        all: true,
-        nested: true,
-        required: false
-      }]
-    })
-    .then(client => {
-       var stream = fs.readStream('/uploads/de1277.pdf');
-       stream.pipe(res)
-    })
-      .catch(error => res.status(400).send(error));
-  }*/
 
 
   getForm(req, res) {
@@ -439,7 +418,7 @@ module.exports = {
     return Client
     .findOne({
       where: {
-        id: req.params.clientId
+        id: req.params.ClientId
       },
       include: [{
         all: true,
@@ -454,430 +433,503 @@ module.exports = {
           });
         }
 
-        filename = client.first_name + "_" + client.last_name + "_Resume"
+        filename = client.first_name + "_" + client.last_name + "_de1277"
 
         res.setHeader('Content-disposition', 'attachment;')
         res.setHeader('filename', filename)
         res.setHeader('Content-type', 'application/pdf')
-        //console.log("HERE1")
-
-        var sourcePDF = "uploads/de1277-1.pdf"
-
-        var data2 = Object()
-        data2["Last_Name"] = client.last_name
-        data2["First_Name"] = client.first_name
-        data2["Phone1_Cell_Box"] = true
-        ////console.log("\""+client.phone+"\"")
-        data2["Phone1_Number"] = client.phone
-        data2["Home_Address"] = client.Address.street_address_one
-        data2["Home_City"] = client.Address.city
-        data2["Home_State"] = client.Address.state
-        data2["Home_ZIP"] = client.Address.zip
-        //data["Phone2_Number"] = "help"
 
 
-         //"Last name" : client.last_name,
-         //"First name" : client.first_name,
-         //"Middle name" :
-         //"Preferred name" :
-         //"Previous last name" :
-         //"Birthdate" : client.dob.getMonth()+ "/" + client.dob.getDay() + "/" +client.dob.getFullYear(),
-         //"Email address" : client.email,
-         //"Phone number cell land other" : client.phone,
-         //"undefined" :
-         //"undefined_2" :
-         //"undefined_3" :
-         //"Second phone number cell land other" :
-         //"undefined_4" :
-         //"undefined_5" :
-         //"undefined_6" :
-         //"City" : client.Address.city,
-         //"State" : client.Address.state,
-         //"County" :
-         //"ZIP code" :
-         //"Mailing address if different than above home address" :
-         //"City_2" :
-         //"State_2" :
-         //"American Indian or Alaskan Native" :
-         //"Asian" :
-         //"Black or African American" :
-         //"Hispanic or Latino" :
-         //"Native Hawaiian or other Pacific Islander" :
-         //"White" :
-         //"Other specify" :
-         //"English" :
-         //"Spanish" :
-         //"Other" :
-         //"Counselor notes" :
-         //"Have you been a prior client of Vocational Rehabilitation" :
-         //"Are you a US citizen" :
-         //"Name" :
-         //"Relationship" :
-         //"Phone number" :
-         //"Name_2" :
-         //"Relationship_2" :
-         //"Phone number_2" :
-         //"Counselor notes_2" :
-         //"Community residentialgroup home" :
-         //"Halfway house transition living" :
-         //"Homelessshelter" :
-         //"Live with parents" :
-         //"Private residence independent" :
-         //"Never" :
-         //"Married" :
-         //"Divorced" :
-         //"Separated" :
-         //"Widowed" :
-         //"Domestic partner" :
-         //"Self only" :
-         //"Selfpartner andor children" :
-         //"Parents" :
-         //"Other_2" :
-         //"Workers compensation" :
-         //"Veterans" : client.military
-         //"Personal income" :
-         //"Other_3" :
-         //"Counselor notes_3" :
-         //"Medicaid" :
-         //"Medicare" :
-         //"OHP Oregon Health Plan" :
-         //"Private insurance other" :
-         //"Private insurance own employer" :
-         //"Public insurance other" :
-         //"Workers compensation_2" :
-         //"None" :
-         //"Counselor notes_4" :
-         //"Are you currently employed" :
-         //"Hours per week" :
-         //"Hourly wage" :
-         //"Are you a migrant or seasonal farm worker" :
-         //"Did you have any difficulties with these duties because of your disability" :
-         //"Employer 3" :
-         //"Job title_3" :
-         //"Job duties_3" :
-         //"Did you have any difficulties with these duties because of your disability_3" :
-         //"Start date_3" :
-         //"End date_3" :
-         //"Last salarypay rate_3" :
-         //"undefined_12" :
-         //"undefined_13" :
-         //"Terminated_3" :
-         //"Laid off_3" :
-         //"Quit_3" :
-         //"Relocatedmoved_3" :
-         //"Other_6" :
-         //"Employer 4" :
-         //"Job title_4" :
-         //"Job duties_4" :
-         //"Did you have any difficulties with these duties because of your disability_4" :
-         //"Start date_4" :
-         //"End date_4" :
-         //"Last salarypay rate_4" :
-         //"undefined_14" :
-         //"undefined_15" :
-         //"Terminated_4" :
-         //"Laid off_4" :
-         //"Quit_4" :
-         //"Relocatedmoved_4" :
-         //"Other_7" :
-         //"Employer 5" :
-         //"Job title_5" :
-         //"Job duties_5" :
-         //"Did you have any difficulties with these duties because of your disability_5" :
-         //"Start date_5" :
-         //"End date_5" :
-         //"Last salarypay rate_5" :
-         //"undefined_16" :
-         //"undefined_17" :
-         //"Terminated_5" :
-         //"Laid off_5" :
-         //"Quit_5" :
-         //"Relocatedmoved_5" :
-         //"Other_8" :
-         //"Counselor notes_5" :
-         //"Are you a veteran" :
-         //"Are you receiving services from Veteran Affairs Vocational Rehabilitation" :
-         //"Are you a preferred worker in Oregon" :
-         //"Year of onset1" :
-         //"How it affects me1" :
-         //"Year of onset2" :
-         //"How it affects me2" :
-         //"Year of onset3" :
-         //"Year of onset4" :
-         //"Year of onset5" :
-         //"Purpose1" :
-         //"Purpose2" :
-         //"Purpose3" :
-         //"Purpose4" :
-         //"Purpose5" :
-         //"Counselor notes_6" :
-         //"Adult Education and Literacy Programs" :
-         //"Adult ParoleProbation" :
-         //"Alcohol and Drug" :
-         //"Alcohol and Drug  Youth" :
-         //"American Indian VR Services Program" :
-         //"Career Workforce Skills Training" :
-         //"Center for Independent Living" :
-         //"Child Protective Services" :
-         //"Community Rehabilitation Program" :
-         //"Consumer Organization or Advocacy Group" :
-         //"DD Brokerage" :
-         //"DD County Case Management" :
-         //"DOL Employment and Training" :
-         //"Educational Institution" :
-         //"Educational Institution postsecondary" :
-         //"Employed Persons with Disability" :
-         //"Employer" :
-         //"Employment Network not otherwise listed" :
-         //"Employment Transition Services" :
-         //"Experience Works" :
-         //"Federal Student Aid pell grant SEOG" :
-         //"General assistance" :
-         //"Independent Living Services" :
-         //"Intellectual and Developmental" :
-         //"Juvenile ParoleProbation" :
-         //"Latino ConnectionEaster Seals" :
-         //"OneStop EmploymentTraining Center" :
-         //"Other State Agency" :
-         //"Other VR State Agency" :
-         //"Public Housing Authority" :
-         //"School  not Youth Transition Program YTP" :
-         //"Schools Youth Transition Program" :
-         //"Seasonal Farm Workers SFW" :
-         //"SSA Disability Determination Service or" :
-         //"State Department of Correction" :
-         //"State Employment Service Agency" :
-         //"Supported Employment" :
-         //"Temp Assistance to Needy Families TANF" :
-         //"Veterans Administration" :
-         //"Welfare Agency state or local government" :
-         //"Work Readiness Workshops" :
-         //"Workers Compensation" :
-         //"Workers Compensation special fund" :
-         //"None_2" :
-         //"Name of agencyRow1" :
-         //"Contact personRow1" :
-         //"Phone numberRow1" :
-         //"Name of agencyRow2" :
-         //"Contact personRow2" :
-         //"Phone numberRow2" :
-         //"Name of agencyRow3" :
-         //"Contact personRow3" :
-         //"Phone numberRow3" :
-         //"Name of agencyRow4" :
-         //"Contact personRow4" :
-         //"Phone numberRow4" :
-         //"Counselor notes counselor see application section page two for benefits information" :
-         //"Learn how to look for and find work" :
-         //"Learn how to work with my disability" :
-         //"Help to decide a work goal" :
-         //"Other_9" :
-         //"Counselor notes_7" :
-         //"What types of work are you interested in doing" :
-         //"undefined_19" :
-         //"undefined_20" :
-         //"undefined_21" :
-         //"undefined_22" :
-         //"If yes what state" :
-         //"Do you have a clean driving record Yes No If no please explain" :
-         //"Do you have a clean driving record" :
-         //"Have you ever been arrested or convicted of a felony or a misdemeanor Yes No If yes please explain" :
-         //"Are you currently on supervision of any type" :
-         //"Name_3" :
-         //"Phone" :
-         //"Counselor notes_8" :
-         //"Do you have any other current legal issuesproblems specify" :
-         //"Do you have any history of substance use or abuse Yes No If yes please explain" :
-         //"Could you pass a drug test Yes No If no please explain" :
-         //"Counselor notes_9" :
-         //"Are you a high school graduate or do you have a GED" :
-         //"School nameRow1" :
-         //"Begin dateRow1" :
-         //"End dateRow1" :
-         //"Degreecertification or area of studyRow1" :
-         //"School nameRow2" :
-         //"Begin dateRow2" :
-         //"End dateRow2" :
-         //"Degreecertification or area of studyRow2" :
-         //"School nameRow3" :
-         //"Begin dateRow3" :
-         //"End dateRow3" :
-         //"Degreecertification or area of studyRow3" :
-         //"School nameRow4" :
-         //"Begin dateRow4" :
-         //"End dateRow4" :
-         //"Degreecertification or area of studyRow4" :
-         //"Are you currently attending college" :
-         //"Are you currently in default on any prior student loans" :
-         //"Counselor notes_10" :
-         //"Have you ever had a head injury or been knocked unconscious" :
-         //"If yes please explain" :
-         //"Do you have any restrictions from your doctor about working" :
-         //"Counselor notes_11" :
-         //"Medical providers Vocational Rehabilitation VR will need your help to get your medical records We need them to document your medical conditions identify your limitations determine if you are eligible for our program plan work goals and identify services you may need to help you get or keep a job If there is not enough space list additional providers on a separate piece of paper Please list all doctors clinics counselors or therapists you have seen in the past or are seeing now for treatment related to your disability Include any physical exams andor learning disability testingRow1" :
-         //"Are you still seeing this provider" :
-         //"Are you still seeing this provider_3" :
-         //"Are you still seeing this provider_4" :
-         //"Medical providerclinic name_5" :
-         //"Are you still seeing this provider_5" :
-         //"Counselor notes_12" :
-         //"Home address" :
-         //"RESIDENCY DATE" :
-         //"Gender" :
-         //"SSN2" :
-         //"SSN1" :
-         //"SSN3" :
-         //"ZIP code_2" :
-         //"other race" :
-         //"other language" :
-         //"prior client" :
-         //"other members" :
-         //"referral" :
-         //"SSDI" :
-         //"TANF" :
-         //"SNAP" :
-         //"subtotal" :
-         //"program" :
-         //"SSI" :
-         //"WC amount" :
-         //"Veterans amount" :
-         //"PI amount" :
-         //"other amount" :
-         //"Total" :
-         //"salary" :
-         //"difficulties3" :
-         //"reason for leaving 3" :
-         //"difficulties4" :
-         //"difficulties5" :
-         //"reason for leaving 5" :
-         //"state" :
-         //"reason for leaving 4" :
-         //"Medication1" :
-         //"Medication2" :
-         //"Medication3" :
-         //"Medication4" :
-         //"Medication5" :
-         //"explain services" :
-         //"grade" :
-         //"school name" :
-         //"school city" :
-         //"school state" :
-         //"attend college" :
-         //"Medical providerclinic name1" :
-         //"Phone number_3" :
-         //"treatment1" :
-         //"recent visit" :
-         //"Are you still seeing this provider2" :
-         //"Medical providerclinic name2" :
-         //"Address2" :
-         //"treatment2" :
-         //"Medical providerclinic name3" :
-         //"Address3" :
-         //"Medical providerclinic name4" :
-         //"Address4" :
-         //"treatment3" :
-         //"treatment4" :
-         //"recent visit4" :
-         //"work_permit" :
-         //"undefined_8" :
-         //"undefined_9" :
-         //"Terminated" :
-         //"Laid off" :
-         //"Quit" :
-         //"Relocatedmoved" :
-         //"Other_4" :
-         //"reason for leaving" :
-         //"difficulties1" :
-         //"Job title_2" :
-         //"Other_5" :
-         //"Relocatedmoved_2" :
-         //"Quit_2" :
-         //"Laid off_2" :
-         //"Terminated_2" :
-         //"undefined_11" :
-         //"Did you have any difficulties with these duties because of your disability_2" :
-         //"Job duties_2" :
-         //"Start date_2" :
-         //"End date_2" :
-         //"Last salarypay rate_2" :
-         //"undefined_10" :
-         //"difficulties2" :
-         //"Start date" :
-         //"End date" :
-         //"Last salarypay rate" :
-         //"Job duties" :
-         //"reason for leaving 2" :
-         //"computer skills" :
-         //"Do you possess a valid drivers license" :
-         //"Other_10" :
-         //"Bike" :
-         //"Car" :
-         //"bus" :
-         //"crime" :
-         //"substance_abuse" :
-         //"drug_test" :
-         //"special_ed" :
-         //"IEP" :
-         //"504" :
-         //"transition" :
-         //"Phone number_4" :
-         //"Phone number_5" :
-         //"Address_5" :
-         //"Phone number_6" :
-         //"recent visit3" :
-         //"Employer 1" :
-         //"Job title" :
-         //"Employer 2" :
-         //"undefined_18" :
-         //"injured_service" :
-         //"condition 1" :
-         //"condition 2" :
-         //"condition 3" :
-         //"condition 4" :
-         //"condition 5" :
-         //"How it affects me5" :
-         //"How it affects me3" :
-         //"How it affects me4" :
-         //"strengths" :
-         //"INSURANCE_2" :
-         //"Address1" :
-         //"Button1" :
-         //"Button3" :
-         //"Phone number_7" :
-         //"recent visit2" :
-         //"recent visit1" :
-         //"treatment5" :
-         //"Medical Health Provider public or private" :
-         //"Mental Health Provider public or private" :
+        //populates data object to pass to fillform() to allow it to fill
+        //out proper fields in the pdf
+        var sourcePDF = "uploads/de1277.pdf"
+        var pdfFillerData = Object()
 
+        /**********************************************
+        *
+        * Page 1
+        *
+        **********************************************/
 
+        pdfFillerData["Last_Name"] = client.last_name
+        pdfFillerData["First_Name"] = client.first_name
+        pdfFillerData["Middle_Name"] = client.middle_name
+        pdfFillerData["Preferred_Name"] = client.preferred_name
+        pdfFillerData["Previous_Last_Name"] = client.previous_last_name
+        pdfFillerData["Email"] = client.email
+        pdfFillerData["Birthdate"] = (client.dob.getMonth() + 1) + "/" + client.dob.getDate() + "/" + client.dob.getFullYear()
+        var num = client.ssn
+        var digits = [];
+        while (num > 0) {
+            digits[digits.length] = num % 10;
+            num = parseInt(num / 10);
+        }
+        digits.reverse();
+        pdfFillerData["SSN1"] = "" + digits[0] + digits[1] + digits[2]
+        pdfFillerData["SSN2"] = "" + digits[3] + digits[4]
+        pdfFillerData["SSN3"] = "" + digits[5] + digits[6] + digits[7]
 
-        //};
+        pdfFillerData["Phone1_Number"] = client.phone
+        pdfFillerData["Phone1_Cell_Box"] = false
+        pdfFillerData["Phone1_Land_Box"] = false
+        pdfFillerData["Phone1_Other_Box"] = false
 
-        ////console.log(data)
-        //console.log()
+        //need to use client.phone_type
+        //need to use client.phone2_type
+        /*
+        pdfFillerData["Phone2_Cell_Box"] =
+        pdfFillerData["Phone2_Land_Box"] =
+        pdfFillerData["Phone2_Other_Box"] =
+        */
 
-
-        var destinationPDF =  "uploads/test_complete.pdf";
-        pdfParser = hummus.createReader(sourcePDF),
-				digitalForm = new PDFDigitalForm(pdfParser);
-        if(digitalForm.hasForm()) {
-          digitalForm.fields.forEach(function(field) {
-              //console.log("\"" + field.name + "\" : ")
-          });
+        pdfFillerData["Home_Address"] = client.Address.street_address_one
+        //pdfFillerData["Home_Address_Begin_Date"] =
+        pdfFillerData["Home_City"] = client.Address.city
+        pdfFillerData["Home_State"] = client.Address.state
+        //pdfFillerData["Home_County"] =
+        pdfFillerData["Home_ZIP"] = client.Address.zip
+        //pdfFillerData["Mailing_Address"] =
+        //pdfFillerData["Mailing_City"] =
+        //pdfFillerData["Mailing_State"] =
+        //pdfFillerData["Mailing_ZIP"] =
+        if(client.race == "white"){
+          pdfFillerData["Race_White"] = true
+        } else if(client.race == "asian"){
+          pdfFillerData["Race_Asian"] = true
+        } else if(client.race == "hispanic" || client.race == "latino"){
+          pdfFillerData["Race_Hispanic or Latino"] = true
+        } else if(client.race == "Hawaiian" || client.race == "pacific islander"){
+          pdfFillerData["Race_Native Hawaiian or other Pacific Islander"] = true
+        } else if(client.race == "black" || client.race == "african american"){
+          pdfFillerData["Race_Black or African American"] = true
+        } else {
+          pdfFillerData["Race_Other specify"] = true
+          pdfFillerData["Race_other race_Text_Box"] = client.race
         }
 
-        //console.log("HERE3")
+        if(client.primary_language == "English"){
+          pdfFillerData["Language_English"] = true
+        } else if(client.primary_language == "Spanish"){
+          pdfFillerData["Language_Spanish"] = true
+        } else{
+          pdfFillerData["Language_Other"] = true
+          pdfFillerData["Language_other language_Text_Box"] = client.primary_language
+        }
+
+        pdfFillerData["Counselor_notes_2"] = client.language_counselor_notes
+        if(client.prior_client){
+
+        }else{
+
+        }
+        /**********************************************
+        *
+        * Page 2
+        *
+        **********************************************/
+        if(client.us_citizen){
+          pdfFillerData["US_Citizen_Yes"] = true
+        }else{
+          pdfFillerData["US_Citizen_No"] = true
+          if(client.work_permit){
+            pdfFillerData["Work_Permit_Yes"] = true
+          }else{
+            pdfFillerData["Work_Permit_No"] = true
+          }
+        }
+
+        pdfFillerData["Counselor_Notes_2"] = client.contacts_counselor_notes
+
+        if(client.living_situation == "Community residential/group home"){
+          pdfFillerData["Community residentialgroup home"] = true
+        }else if(client.living_situation == "Halfway house"){
+          pdfFillerData["Halfway house transition living"] = true
+        }else if(client.living_situation == "Homeless Shelter"){
+          pdfFillerData["Homelessshelter"] = true
+        }else if(client.living_situation == "Private residence"){
+          pdfFillerData["Private residence independent"] = true
+        }else if(client.living_situation == "Live with parents"){
+          pdfFillerData["Live with parents"] = true
+        }
+
+        //pdfFillerData["Contact1_Name"] =
+        //pdfFillerData["Contact1_Relationship"] =
+        //pdfFillerData["Contact1_Phone_Number"] =
+        //pdfFillerData["Contact2_Name"] =
+        //pdfFillerData["Contact2_Relationship"] =
+        //pdfFillerData["Contact2_Phone_Number"] =
+        pdfFillerData["Counselor_Notes_2"] = client.contacts_counselor_notes
+
+        if(client.marital_status == "Never"){
+          pdfFillerData["Marital_Status_Never"] = true
+        }else if(client.marital_status == "Married"){
+          pdfFillerData["Marital_Status_Married"] = true
+        }else if(client.marital_status == "Divorced"){
+          pdfFillerData["Marital_Status_Divorced"] = true
+        }else if(client.marital_status == "Seperated"){
+          pdfFillerData["Marital_Status_Seperated"] = true
+        }else if(client.marital_status == "Widowed"){
+          pdfFillerData["Marital_Status_Widowed"] = true
+        }else if(client.marital_status == "Domestic Partner"){
+          pdfFillerData["Marital_Status_Domestic_Partner"] = true
+        }
+
+        if(client.living_with_you_self_only){
+          pdfFillerData["Living_With_Self"] = true
+        }
+        if(client.living_with_you_partner_children){
+          pdfFillerData["Living_With_Partner_Children"] = true
+        }
+        if(client.living_with_you_parents){
+          pdfFillerData["Living_With_Parents"] = true
+        }
+        if(client.living_with_you_other){
+          pdfFillerData["Living_With_Other"] = true
+          pdfFillerData["Living_With_Other_Text_Box"] = client.living_with_you_other_explain
+        }
+
+        pdfFillerData["Referral_Person"] = client.who_reffered_you
+
+        pdfFillerData["SSI"] = client.income_SSI
+        pdfFillerData["SSDI"] = client.income_SSDI
+        pdfFillerData["TANF"] = client.income_TANF
+        pdfFillerData["SNAP"] = client.income_SNAP
+        pdfFillerData["subtotal"] = client.income_subtotal
+
+        pdfFillerData["Workers_Comp_Source"] = client.income_workers_comp_source
+        pdfFillerData["Workers_Comp_Veteran"] = client.income_veterans_source
+        pdfFillerData["Workers_Comp_Program"] = client.income_veterans_progam
+        pdfFillerData["Personal_Income_Source"] = client.income_personal_source
+        pdfFillerData["Other_Source"] = client.income_other_source
+        pdfFillerData["Income_Workers_Comp"] = client.income_workers_comp_amount
+        pdfFillerData["Income_Veteran"] = client.income_veterans_amount
+        pdfFillerData["Income_Personal"] = client.income_personal_amount
+        pdfFillerData["Income_Other"] = client.income_other_amount
+        pdfFillerData["Income_Total"] = client.income_total
+        pdfFillerData["Counselor_Notes_3"] = client.income_counselor_notes
+
+        /**********************************************
+        *
+        * Page 3/4
+        *
+        **********************************************/
+        pdfFillerData["Insurance_Medicaid"] = client.insurance_medicaid
+        pdfFillerData["Insurance_Private_Other"] = client.insurance_private_other
+        pdfFillerData["Insurance_Workers_Comp"] = client.insurance_workers_comp
+        pdfFillerData["Insurance_Medicare"] = client.insurance_medicare
+        pdfFillerData["Insurance_Private_Employer"] = client.insurance_private_employer
+        pdfFillerData["Insurance_None"] = client.insurance_none
+        pdfFillerData["Insurance_OHP"] = client.insurance_OHP
+        pdfFillerData["Insurance_Public"] = client.insurance_public
+        pdfFillerData["Counselor_Notes_4"] = client.insurance_counselor_notes
+
+        if(client.currently_employed){
+          pdfFillerData["Employed_Yes"] = true
+        }else{
+          pdfFillerData["Employed_No"] = true
+        }
+        pdfFillerData["Employed_Hours_Per_Week"] = client.current_hours_per_week
+        pdfFillerData["Employed_Salary"] = client.current_salary
+        pdfFillerData["Employed_Hourly_Wage"] = client.current_hourly_wage
+        if(client.current_seasonal_farm_worker){
+          pdfFillerData["Migrant_Farmer_Yes"] = true
+        } else{
+          pdfFillerData["Migrant_Farmer_No"] = true
+        }
+
+        //displays Employment Details(if any)
+        let exp = client.EmploymentDetails
+        if(exp != null){
+          for(var i = 0; i < exp.length; i++){
+            var job = exp[i]
+            if(i == 0){
+              pdfFillerData["Employer_1"] = job.organization
+              pdfFillerData["Job_Duties_1"] = job.description
+              pdfFillerData["Job_Title_1"] = job.job_title
+              if(job.difficulties){
+                pdfFillerData["Disability_1_Yes"] = true
+                pdfFillerData["Difficulties_1_Explanation"] = job.difficulties_explain
+              }else if(!job.difficulties){
+                pdfFillerData["Disability_1_No"] = true
+              }
+              pdfFillerData["Job_1_Salary"] = job.pay
+              pdfFillerData["Job_1_Start"] = (job.start.getMonth() + 1) + "/" + job.start.getDate() + "/" + job.start.getFullYear()
+              pdfFillerData["Job_1_End"] = (job.end.getMonth() + 1) + "/" + job.end.getDate() + "/" + job.end.getFullYear()
+              if(job.leaving_reason == "Terminated"){
+                pdfFillerData["Reason_For_Leaving_1_Terminated"] = true
+              }else if(job.leaving_reason == "Laid Off"){
+                pdfFillerData["Reason_For_Leaving_1_Laid_Off"] = true
+              }else if(job.leaving_reason == "Quit"){
+                pdfFillerData["Reason_For_Leaving_1_Quit"] = true
+              }else if(job.leaving_reason == "Relocated"){
+                pdfFillerData["Reason_For_Leaving_1_Relocated"] = true
+              }else{
+                pdfFillerData["Reason_For_Leaving_1_Other"] = true
+              }
+              pdfFillerData["Job_1_Reason_For_Leaving"] = job.leaving_reason_explain
+              if(job.full_time){
+                pdfFillerData["Job_1_Full_Time"] = true
+              }
+              if(job.part_time){
+                pdfFillerData["Job_1_Part_Time"] = true
+              }
+            }else if(i == 1){
+              pdfFillerData["Employer_2"] = job.organization
+              pdfFillerData["Job_Duties_2"] = job.description
+              pdfFillerData["Job_Title_2"] = job.job_title
+              if(job.difficulties){
+                pdfFillerData["Disability_2_Yes"] = true
+                pdfFillerData["Difficulties_2_Explanation"] = job.difficulties_explain
+              }else if(!job.difficulties){
+                pdfFillerData["Disability_2_No"] = true
+              }
+              pdfFillerData["Job_2_Salary"] = job.pay
+              pdfFillerData["Job_2_Start"] = (job.start.getMonth() + 1) + "/" + job.start.getDate() + "/" + job.start.getFullYear()
+              pdfFillerData["Job_2_End"] = (job.end.getMonth() + 1) + "/" + job.end.getDate() + "/" + job.end.getFullYear()
+              if(job.leaving_reason == "Terminated"){
+                pdfFillerData["Reason_For_Leaving_2_Terminated"] = true
+              }else if(job.leaving_reason == "Laid Off"){
+                pdfFillerData["Reason_For_Leaving_2_Laid_Off"] = true
+              }else if(job.leaving_reason == "Quit"){
+                pdfFillerData["Reason_For_Leaving_2_Quit"] = true
+              }else if(job.leaving_reason == "Relocated"){
+                pdfFillerData["Reason_For_Leaving_2_Relocated"] = true
+              }else{
+                pdfFillerData["Reason_For_Leaving_2_Other"] = true
+              }
+              pdfFillerData["Job_2_Reason_For_Leaving"] = job.leaving_reason_explain
+              if(job.full_time){
+                pdfFillerData["Job_2_Full_Time"] = true
+              }
+              if(job.part_time){
+                pdfFillerData["Job_2_Part_Time"] = true
+              }
+            }else if(i == 2){
+              pdfFillerData["Employer_3"] = job.organization
+              pdfFillerData["Job_Duties_3"] = job.description
+              pdfFillerData["Job_Title_3"] = job.job_title
+              if(job.difficulties){
+                pdfFillerData["Disability_3_Yes"] = true
+                pdfFillerData["Difficulties_3_Explanation"] = job.difficulties_explain
+              }else if(!job.difficulties){
+                pdfFillerData["Disability_3_No"] = true
+              }
+              pdfFillerData["Job_3_Salary"] = job.pay
+              pdfFillerData["Job_3_Start"] = (job.start.getMonth() + 1) + "/" + job.start.getDate() + "/" + job.start.getFullYear()
+              pdfFillerData["Job_3_End"] = (job.end.getMonth() + 1) + "/" + job.end.getDate() + "/" + job.end.getFullYear()
+              if(job.leaving_reason == "Terminated"){
+                pdfFillerData["Reason_For_Leaving_3_Terminated"] = true
+              }else if(job.leaving_reason == "Laid Off"){
+                pdfFillerData["Reason_For_Leaving_3_Laid_Off"] = true
+              }else if(job.leaving_reason == "Quit"){
+                pdfFillerData["Reason_For_Leaving_3_Quit"] = true
+              }else if(job.leaving_reason == "Relocated"){
+                pdfFillerData["Reason_For_Leaving_3_Relocated"] = true
+              }else{
+                pdfFillerData["Reason_For_Leaving_3_Other"] = true
+              }
+              pdfFillerData["Job_3_Reason_For_Leaving"] = job.leaving_reason_explain
+              if(job.full_time){
+                pdfFillerData["Job_3_Full_Time"] = true
+              }
+              if(job.part_time){
+                pdfFillerData["Job_3_Part_Time"] = true
+              }
+            }else if(i == 3){
+              pdfFillerData["Employer 4"] = job.organization
+              pdfFillerData["Job duties_4"] = job.description
+              pdfFillerData["Job title_4"] = job.job_title
+              pdfFillerData["Last salarypay rate_4"] = job.pay
+              pdfFillerData["Start date_4"] = (job.start.getMonth() + 1) + "/" + job.start.getDate() + "/" + job.start.getFullYear()
+              pdfFillerData["End date_4"] = (job.end.getMonth() + 1) + "/" + job.end.getDate() + "/" + job.end.getFullYear()
+            }else if(i == 4){
+              pdfFillerData["Employer 5"] = job.organization
+              pdfFillerData["Job duties_5"] = job.description
+              pdfFillerData["Job title_5"] = job.job_title
+              pdfFillerData["Last salarypay rate_5"] = job.pay
+              pdfFillerData["Start date_5"] = (job.start.getMonth() + 1) + "/" + job.start.getDate() + "/" + job.start.getFullYear()
+              pdfFillerData["End date_5"] = (job.end.getMonth() + 1) + "/" + job.end.getDate() + "/" + job.end.getFullYear()
+            }
+          }
+        }
+
+        pdfFillerData["Counselor notes_5"] = client.employment_counselor_notes
+
+        /**********************************************
+        *
+        * Page 5
+        *
+        **********************************************/
+
+        if(client.military){
+          pdfFillerData["Yes_Vet"] = true
+          if(client.injured_during_service){
+            pdfFillerData["Injured_During_Service_Yes"] = true
+          }else{
+            pdfFillerData["Injured_During_Service_No"] = true
+          }
+
+          if(client.receiving_VAVR_services){
+            pdfFillerData["VA_VR_Yes"] = true
+          }else{
+            pdfFillerData["VA_VR_No"] = true
+          }
+        }else{
+          pdfFillerData["No_Vet"] = true
+        }
+
+        if(client.workers_comp_claim == "Yes"){
+          pdfFillerData["Workers_Comp_Claim_Yes"] = true
+        }else if(client.workers_comp_claim == "No"){
+          pdfFillerData["Workers_Comp_Claim_No"] = true
+        }else if(client.workers_comp_claim == "Pending"){
+          pdfFillerData["Workers_Comp_Claim_Pending"] = true
+        }
+
+        pdfFillerData["Worker_Comp_Claim_State"] = client.workers_comp_claim_state
+
+        if(client.oregon_preffered_worker){
+          pdfFillerData["Oregon_Preferred_Worker_Yes"] = true
+        }else{
+          pdfFillerData["Oregon_Preferred_Worker_No"] = true
+        }
+
+        pdfFillerData["Disability_Condition_1"] = client.condition1
+        pdfFillerData["DC_1_Year"] = client.condition1_year_onset
+        pdfFillerData["DC_1_Affect"] = client.condition1_how_affects
+        pdfFillerData["Disability_Condition_2"] = client.condition2
+        pdfFillerData["DC_2_Year"] = client.condition2_year_onset
+        pdfFillerData["DC_2_Affect"] = client.condition2_how_affects
+        pdfFillerData["Disability_Condition_3"] =client.condition3
+        pdfFillerData["DC_3_Year"] = client.condition3_year_onset
+        pdfFillerData["DC_3_Affect"] = client.condition3_how_affects
+        pdfFillerData["Disability_Condition_4"] = client.condition4
+        pdfFillerData["DC_4_Year"] = client.condition4_year_onset
+        pdfFillerData["DC_4_Affect"] =client.condition4_how_affects
+        pdfFillerData["DC_5_Affect"] = client.condition5_how_affects
+        pdfFillerData["DC_5_Yead"] = client.condition5_year_onset
+        pdfFillerData["Disability_Condition_5"] = client.condition5
+        pdfFillerData["Counselor_Notes_6"] = client.disability_counselor_notes
 
 
+        pdfFillerData["Medication1"] = client.medication1
+        pdfFillerData["Medication2"] = client.medication2
+        pdfFillerData["Medication3"] = client.medication3
+        pdfFillerData["Medication4"] = client.medication4
+        pdfFillerData["Medication5"] = client.medication5
+
+        pdfFillerData["Purpose1"] = client.medication1_purpose
+        pdfFillerData["Purpose2"] = client.medication2_purpose
+        pdfFillerData["Purpose3"] = client.medication3_purpose
+        pdfFillerData["Purpose4"] = client.medication4_purpose
+        pdfFillerData["Purpose5"] = client.medication5_purpose
+
+        /**********************************************
+        *
+        * Page 8/9
+        *
+        **********************************************/
+
+        if(client.high_school_graduate){
+          pdfFillerData["HS_Yes"] = true
+        }else{
+          pdfFillerData["grade"] = client.highest_grade_completed
+        }
+        //currently 4 education rows so will only accept 4 education data points
+        edu = client.EducationDetails
+        if (edu){
+          for(var i = 0; i < edu.length; i++){
+            var school = edu[i]
+            if(school.high_school){
+              if(school.hs_diploma){
+                if(i == 0){
+                  pdfFillerData["School nameRow1"] = school.name
+                  pdfFillerData["Degreecertification or area of studyRow1"] = "Diploma"
+                }else if(i == 1){
+                  pdfFillerData["School nameRow2"] = school.name
+                  pdfFillerData["Degreecertification or area of studyRow2"] = "Diploma"
+                }else if(i == 2){
+                  pdfFillerData["School nameRow3"] = school.name
+                  pdfFillerData["Degreecertification or area of studyRow3"] = "Diploma"
+                }else if(i == 3){
+                  pdfFillerData["School nameRow4"] = school.name
+                  pdfFillerData["Degreecertification or area of studyRow4"] = "Diploma"
+                }
+              }
+              if(school.ged){
+                if(i == 0){
+                  pdfFillerData["School nameRow1"] = school.name
+                  pdfFillerData["Degreecertification or area of studyRow1"] = "GED"
+                }else if(i == 1){
+                  pdfFillerData["School nameRow2"] = school.name
+                  pdfFillerData["Degreecertification or area of studyRow2"] = "GED"
+                }else if(i == 2){
+                  pdfFillerData["School nameRow3"] = school.name
+                  pdfFillerData["Degreecertification or area of studyRow3"] = "GED"
+                }else if(i == 3){
+                  pdfFillerData["School nameRow4"] = school.name
+                  pdfFillerData["Degreecertification or area of studyRow4"] = "GED"
+                }
+              }
+            }
+            if(school.college){
+              if(i == 0){
+                pdfFillerData["School nameRow1"] = school.name
+                pdfFillerData["Degreecertification or area of studyRow1"] = school.certificate
+              }else if(i == 1){
+                pdfFillerData["School nameRow2"] = school.name
+                pdfFillerData["Degreecertification or area of studyRow2"] = school.certificate
+              }else if(i == 2){
+                pdfFillerData["School nameRow3"] = school.name
+                pdfFillerData["Degreecertification or area of studyRow3"] = school.certificate
+              }else if(i == 3){
+                pdfFillerData["School nameRow4"] = school.name
+                pdfFillerData["Degreecertification or area of studyRow4"] = school.certificate
+              }
+            }
+            if(school.vocational){
+              if(i == 0){
+                pdfFillerData["School nameRow1"] = school.name
+                pdfFillerData["Degreecertification or area of studyRow1"] = school.certificate
+              }else if(i == 1){
+                pdfFillerData["School nameRow2"] = school.name
+                pdfFillerData["Degreecertification or area of studyRow2"] = school.certificate
+              }else if(i == 2){
+                pdfFillerData["School nameRow3"] = school.name
+                pdfFillerData["Degreecertification or area of studyRow3"] = school.certificate
+              }else if(i == 3){
+                pdfFillerData["School nameRow4"] = school.name
+                pdfFillerData["Degreecertification or area of studyRow4"] = school.certificate
+              }
+            }
+          }
+        }
+
+
+
+
+
+        //This chunk gets the form field names to programatically fill out pdf
+        var destinationPDF =  "uploads/test_complete.pdf";
+
+        pdfParser = hummus.createReader(sourcePDF),
+        digitalForm = new PDFDigitalForm(pdfParser);
+        if(digitalForm.hasForm()) {
+          digitalForm.fields.forEach(function(field) {
+
+              console.log("pdfFillerData[\"" + field.name + "\"] = ")
+          });
+        }
+        //console.log("HELPs")
+
+
+        //fills out pdf form
         var writer = hummus.createWriterToModify(sourcePDF, {
-       			modifiedFilePath: destinationPDF
-       		});
-
-
-        fillForm(writer,data2);
+            modifiedFilePath: destinationPDF
+          });
+      //  var writer = hummus.createWriter(new hummus.PDFStreamForResponse(res))
+        fillForm(writer,pdfFillerData);
         writer.end();
-        //console.log("HERE2")
         fs.createReadStream(destinationPDF).pipe(res)
 
       })
