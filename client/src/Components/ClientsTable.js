@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import createResume from './ResumeGenerator';
-import UserProfile from './UserProfile';
+import UserProfile from './UserProfile/UserProfile';
 import { NavLink } from 'react-router-dom';
 const moment = require('moment');
 const FileSaver = require('file-saver');
 
-class ClientData extends Component {
+class ClientsData extends Component {
   constructor(props){
     super(props);
     this.getClients = this.getClients.bind(this);
@@ -234,4 +234,8 @@ class ClientData extends Component {
   }
 }
 
+<<<<<<< HEAD:client/src/Components/ClientTable.js
 export default (ClientData);
+=======
+export default (ClientsData);
+>>>>>>> teamcrux/master:client/src/Components/ClientsTable.js
