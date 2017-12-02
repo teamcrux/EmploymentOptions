@@ -531,12 +531,13 @@ module.exports = {
           pdfFillerData["US_Citizen_Yes"] = true
         }else{
           pdfFillerData["US_Citizen_No"] = true
+          if(client.work_permit){
+            pdfFillerData["Work_Permit_Yes"] = true
+          }else{
+            pdfFillerData["Work_Permit_No"] = true
+          }
         }
-        if(client.work_permit){
-          pdfFillerData["Work_Permit_Yes"] = true
-        }else{
-          pdfFillerData["Work_Permit_No"] = true
-        }
+
         pdfFillerData["Counselor_Notes_2"] = client.contacts_counselor_notes
 
         if(client.living_situation == "Community residential/group home"){
