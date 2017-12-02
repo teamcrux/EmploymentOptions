@@ -442,58 +442,21 @@ module.exports = {
 
         //populates data object to pass to fillform() to allow it to fill
         //out proper fields in the pdf
+        var sourcePDF = "uploads/de1277.pdf"
+        var pdfFillerData = Object()
 
-        /***********************
+        /**********************************************
         *
         * Page 1
         *
-        ***********************/
+        **********************************************/
+
         pdfFillerData["Last_Name"] = client.last_name
         pdfFillerData["First_Name"] = client.first_name
         pdfFillerData["Middle_Name"] = client.middle_name
         pdfFillerData["Preferred_Name"] = client.preferred_name
         pdfFillerData["Previous_Last_Name"] = client.previous_last_name
         pdfFillerData["Email"] = client.email
-
-        //need to use client.phone_type
-        /*
-        pdfFillerData["Phone1_Cell_Box"] =
-        pdfFillerData["Phone1_Land_Box"] =
-        pdfFillerData["Phone1_Other_Box"] =
-        */
-
-        //need to use client.phone2_type
-        /*
-        pdfFillerData["Phone2_Cell_Box"] =
-        pdfFillerData["Phone2_Land_Box"] =
-        pdfFillerData["Phone2_Other_Box"] =
-        */
-/*
-        pdfFillerData["Home_Address"] = client.Address.street_address_one
-        //pdfFillerData["Home_Address_Begin_Date"] =
-        pdfFillerData["Home_City"] = client.
-        pdfFillerData["Home_State"] =
-        pdfFillerData["Home_County"] =
-        pdfFillerData["Home_ZIP"] =
-        pdfFillerData["Mailing_Address"] =
-        pdfFillerData["Mailing_City"] =
-        pdfFillerData["Mailing_State"] =
-        pdfFillerData["Mailing_ZIP"] =*/
-
-
-        var sourcePDF = "uploads/de1277-1.pdf"
-        var pdfFillerData = Object()
-        pdfFillerData["Last_Name"] = client.last_name
-        pdfFillerData["First_Name"] = client.first_name
-        pdfFillerData["Phone1_Cell_Box"] = true
-        pdfFillerData["Phone1_Number"] = client.phone
-        pdfFillerData["Home_Address"] = client.Address.street_address_one
-        pdfFillerData["Home_City"] = client.Address.city
-        pdfFillerData["Home_State"] = client.Address.state
-        pdfFillerData["Home_ZIP"] = client.Address.zip
-        pdfFillerData["Gender"] = client.gender
-        pdfFillerData["Email"] = client.email
-
         pdfFillerData["Birthdate"] = (client.dob.getMonth() + 1) + "/" + client.dob.getDate() + "/" + client.dob.getFullYear()
         var num = client.ssn
         var digits = [];
@@ -506,6 +469,96 @@ module.exports = {
         pdfFillerData["SSN2"] = "" + digits[3] + digits[4]
         pdfFillerData["SSN3"] = "" + digits[5] + digits[6] + digits[7]
 
+        pdfFillerData["Phone1_Number"] = client.phone
+        pdfFillerData["Phone1_Cell_Box"] = false
+        pdfFillerData["Phone1_Land_Box"] = false
+        pdfFillerData["Phone1_Other_Box"] = false
+
+        //need to use client.phone_type
+        //need to use client.phone2_type
+        /*
+        pdfFillerData["Phone2_Cell_Box"] =
+        pdfFillerData["Phone2_Land_Box"] =
+        pdfFillerData["Phone2_Other_Box"] =
+        */
+
+        pdfFillerData["Home_Address"] = client.Address.street_address_one
+        //pdfFillerData["Home_Address_Begin_Date"] =
+        pdfFillerData["Home_City"] = client.Address.city
+        pdfFillerData["Home_State"] = client.Address.state
+        //pdfFillerData["Home_County"] =
+        pdfFillerData["Home_ZIP"] = client.Address.zip
+        //pdfFillerData["Mailing_Address"] =
+        //pdfFillerData["Mailing_City"] =
+        //pdfFillerData["Mailing_State"] =
+        //pdfFillerData["Mailing_ZIP"] =
+        if(client.race == "white"){
+          pdfFillerData["Race_White"] = true
+        } else if(client.race == "asian"){
+          pdfFillerData["Race_Asian"] = true
+        } else if(client.race == "hispanic" || client.race == "latino"){
+          pdfFillerData["Race_Hispanic or Latino"] = true
+        } else if(client.race == "Hawaiian" || client.race == "pacific islander"){
+          pdfFillerData["Race_Native Hawaiian or other Pacific Islander"] = true
+        } else if(client.race == "black" || client.race == "african american"){
+          pdfFillerData["Race_Black or African American"] = true
+        } else {
+          pdfFillerData["Race_Other specify"] = true
+          pdfFillerData["Race_other race_Text_Box"] = client.race
+        }
+
+        if(client.primary_language == "English"){
+          pdfFillerData["Language_English"] = true
+        } else if(client.primary_language == "Spanish"){
+          pdfFillerData["Language_Spanish"] = true
+        } else{
+          pdfFillerData["Language_Other"] = true
+          pdfFillerData["Language_other language_Text_Box"] = client.primary_language
+        }
+
+        pdfFillerData["Counselor_notes_2"] = client.language_counselor_notes
+        if(client.prior_client){
+
+        }else{
+
+        }
+        /**********************************************
+        *
+        * Page 2
+        *
+        **********************************************/
+        if(client.us_citizen){
+          pdfFillerData["US_Citizen_Yes"] = true
+        }else{
+          pdfFillerData["US_Citizen_No"] = true
+        }
+        if(client.work_permit){
+          pdfFillerData["Work_Permit_Yes"] = true
+        }else{
+          pdfFillerData["Work_Permit_No"] = true
+        }
+        pdfFillerData["Counselor_Notes_2"] = client.contacts_counselor_notes
+
+        if(client.living_situation == "Community residential/group home"){
+          pdfFillerData["Community residentialgroup home"] = true
+        }else if(client.living_situation == "Halfway house"){
+          pdfFillerData["Halfway house transition living"] = true
+        }else if(client.living_situation == "Homeless Shelter"){
+          pdfFillerData["Homelessshelter"] = true
+        }else if(client.living_situation == "Private residence"){
+          pdfFillerData["Private residence independent"] = true
+        }else if(client.living_situation == "Live with parents"){
+          pdfFillerData["Live with parents"] = true
+        }
+
+        //pdfFillerData["Contact1_Name"] =
+        //pdfFillerData["Contact1_Relationship"] =
+        //pdfFillerData["Contact1_Phone_Number"] =
+        //pdfFillerData["Contact2_Name"] =
+        //pdfFillerData["Contact2_Relationship"] =
+        //pdfFillerData["Contact2_Phone_Number"] =
+        pdfFillerData["Counselor_Notes_2"] = client.contacts_counselor_notes
+        /*
         if(client.military){
           pdfFillerData["Yes_Vet"] = true
         }else{
@@ -669,9 +722,10 @@ module.exports = {
           }
         }
 
-        var destinationPDF =  "uploads/test_complete.pdf";
 
         //This chunk gets the form field names to programatically fill out pdf
+*/
+        var destinationPDF =  "uploads/test_complete.pdf";
 
         pdfParser = hummus.createReader(sourcePDF),
 				digitalForm = new PDFDigitalForm(pdfParser);

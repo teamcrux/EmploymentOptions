@@ -19,21 +19,6 @@ module.exports = {
 
     // create Days of Week JSON
     const daysOfWeekJSON = getDaysOfWeekJSON(formData);
-
-<<<<<<< HEAD
-    /*return Client.create({
-      first_name: formData.fname,
-      last_name: formData.lname,
-      registration_date: date,
-      createdAt: date,
-      UpdatedAt: date,
-    }).then(client => { res.status(201).send(client); })
-      .catch(error => res.status(400).send(error));
-  },*/
-
-
-=======
->>>>>>> c0f6acd271fb3cf8334bc071fcd3506ae50412c3
     // create client address
     Address.create({}).then( address => {
       let address_id = address.get('id');
@@ -52,7 +37,7 @@ module.exports = {
         registration_date: date,
         createdAt: date,
         updatedAt: date,
-        
+
       }).then(client => {
         let client_id = client.get('id');
 
@@ -65,7 +50,7 @@ module.exports = {
             AddressId: alt_address_id
           });
         });
-        
+
         res.status(201).send(client);
       })
       .catch(error => res.status(400).send("Server Error Creating Client").then(console.log(error)));

@@ -214,13 +214,8 @@ class ClientData extends Component {
       <div className="clients-table">
         <table>
           <thead>
-<<<<<<< HEAD
             <tr>
-              <th>Reg.Date</th>
-              <th>First Name</th>
-=======
-            <tr>    
->>>>>>> c0f6acd271fb3cf8334bc071fcd3506ae50412c3
+
               <th>Last Name</th>
               <th>First Name</th>
               <th></th>
