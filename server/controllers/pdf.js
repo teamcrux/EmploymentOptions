@@ -20,7 +20,7 @@ module.exports = {
 
 
   all(req, res) {
-    console.log(req.body);
+    //console.log(req.body);
     return Client
     .findOne({
       where: {
@@ -131,9 +131,9 @@ module.exports = {
           doc.moveDown(0.5)
           doc.fillColor('black')
 
-          console.log(skills.length);
+          //console.log(skills.length);
           for (var i = 0; i < skills.length; i++) {
-            //console.log(skills[i]['key_skill'])
+            ////console.log(skills[i]['key_skill'])
             doc.moveDown(0.1)
             doc.fontSize(9)
             doc.text (skills[i]['key_skill'] ,{
@@ -159,14 +159,14 @@ module.exports = {
           })
 
           doc.moveDown(0.5)
-          console.log(exp.length)
+          //console.log(exp.length)
           for(var i = 0; i < exp.length; i++){
             if(i != 0){
               doc.moveDown(1.5)
             }
             doc.fillColor('#7c4399')
             var job = exp[i]
-            console.log(job)
+            //console.log(job)
             doc.moveDown(0.1)
             doc.fontSize(11)
             doc.font('Times-Bold')
@@ -301,7 +301,7 @@ module.exports = {
           doc.fillColor('black')
           doc.moveDown(0.5)
           if (edu){
-            console.log(edu.length)
+            //console.log(edu.length)
             for(var i = 0; i < edu.length; i++){
               doc.moveDown(0.5)
               var school = edu[i]
@@ -384,7 +384,7 @@ module.exports = {
                   ellipsis: true
                 })
               }
-              console.log(school)
+              //console.log(school)
             }
           }
         }
@@ -414,7 +414,7 @@ module.exports = {
 
   },
   /*getForm(req, res) {
-    console.log(req.body);
+    //console.log(req.body);
     return Client
     .findOne({
       where: {
@@ -435,7 +435,7 @@ module.exports = {
 
 
   getForm(req, res) {
-    console.log(req.body);
+    //console.log(req.body);
     return Client
     .findOne({
       where: {
@@ -459,7 +459,7 @@ module.exports = {
         res.setHeader('Content-disposition', 'attachment;')
         res.setHeader('filename', filename)
         res.setHeader('Content-type', 'application/pdf')
-        console.log("HERE1")
+        //console.log("HERE1")
 
         var sourcePDF = "uploads/de1277-1.pdf"
 
@@ -467,7 +467,7 @@ module.exports = {
         data2["Last_Name"] = client.last_name
         data2["First_Name"] = client.first_name
         data2["Phone1_Cell_Box"] = true
-        //console.log("\""+client.phone+"\"")
+        ////console.log("\""+client.phone+"\"")
         data2["Phone1_Number"] = client.phone
         data2["Home_Address"] = client.Address.street_address_one
         data2["Home_City"] = client.Address.city
@@ -854,8 +854,8 @@ module.exports = {
 
         //};
 
-        //console.log(data)
-        console.log()
+        ////console.log(data)
+        //console.log()
 
 
         var destinationPDF =  "uploads/test_complete.pdf";
@@ -863,11 +863,11 @@ module.exports = {
 				digitalForm = new PDFDigitalForm(pdfParser);
         if(digitalForm.hasForm()) {
           digitalForm.fields.forEach(function(field) {
-              console.log("\"" + field.name + "\" : ")
+              //console.log("\"" + field.name + "\" : ")
           });
         }
 
-        console.log("HERE3")
+        //console.log("HERE3")
 
 
         var writer = hummus.createWriterToModify(sourcePDF, {
@@ -877,7 +877,7 @@ module.exports = {
 
         fillForm(writer,data2);
         writer.end();
-        console.log("HERE2")
+        //console.log("HERE2")
         fs.createReadStream(destinationPDF).pipe(res)
 
       })
