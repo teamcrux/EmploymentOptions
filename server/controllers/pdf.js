@@ -304,7 +304,6 @@ module.exports = {
               doc.moveDown(0.5)
               var school = edu[i]
               if(school.high_school){
-                if(school.hs_diploma){
                   doc.moveDown(0.1)
                   doc.fontSize(11)
                   doc.font('Times-Bold')
@@ -326,30 +325,6 @@ module.exports = {
                     align: 'left',
                     ellipsis: true
                   })
-                }
-                if(school.ged){
-                  doc.moveDown(0.1)
-                  doc.fontSize(11)
-                  doc.fillColor('#7c4399')
-                  doc.font('Times-Bold')
-                  doc.text (school.name ,{
-                    width: 412,
-                    indent: 5,
-                    align: 'left',
-                    ellipsis: true
-                  })
-
-                  doc.fillColor('black')
-                  doc.moveDown(0.1)
-                  doc.fontSize(9)
-                  doc.font('Times-Roman')
-                  doc.text ("GED",{
-                    width: 412,
-                    indent: 10,
-                    align: 'left',
-                    ellipsis: true
-                  })
-                }
               }
               if(school.college){
                 doc.moveDown(0.1)
@@ -365,7 +340,7 @@ module.exports = {
 
                 doc.fillColor('black')
                 doc.font('Times-Roman')
-                doc.text (school.certificate ,{
+                doc.text (school.diploma_type ,{
                   width: 412,
                   indent: 10,
                   align: 'left',
