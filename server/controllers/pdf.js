@@ -888,7 +888,7 @@ module.exports = {
         var destinationPDF =  "uploads/test_complete.pdf";
 
         pdfParser = hummus.createReader(sourcePDF),
-				digitalForm = new PDFDigitalForm(pdfParser);
+        digitalForm = new PDFDigitalForm(pdfParser);
         if(digitalForm.hasForm()) {
           digitalForm.fields.forEach(function(field) {
 
@@ -900,8 +900,8 @@ module.exports = {
 
         //fills out pdf form
         var writer = hummus.createWriterToModify(sourcePDF, {
-       			modifiedFilePath: destinationPDF
-       		});
+            modifiedFilePath: destinationPDF
+          });
       //  var writer = hummus.createWriter(new hummus.PDFStreamForResponse(res))
         fillForm(writer,pdfFillerData);
         writer.end();
