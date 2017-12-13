@@ -1,11 +1,8 @@
 import React from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import { Redirect } from 'react-router-dom';
-import validate from '../validate';
-import UserHeader from '../UserHeader';
-import UserNavBar from '../UserNavBar';
-
-import renderExperience from '../Experience';
+import validate from './validate';
+import renderExperience from './Experience';
 import renderRefs from './References';
 import Personal from './Personal';
 import General from './General';
@@ -16,6 +13,8 @@ import ResumeInfo from './ResumeInfo';
 import SubstanceUse from './SubstanceUse';
 import FinancialInfo from './FinancialInfo';
 import Transportation from './Transportation';
+import UserHeader from './UserHeader';
+import UserNavBar from './UserNavBar';
 
 class MasterForm extends React.Component{
 	constructor(props){

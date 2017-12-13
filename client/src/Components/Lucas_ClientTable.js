@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import createResume from './ResumeGenerator';
-import UserProfile from './UserProfile/UserProfile';
+import Lucas_UserProfile from './Lucas_UserProfile';
 import { NavLink } from 'react-router-dom';
 const moment = require('moment');
 const FileSaver = require('file-saver');
 
-class ClientsData extends Component {
+class Lucas_ClientData extends Component {
   constructor(props){
     super(props);
     this.getClients = this.getClients.bind(this);
     this.downResume = this.downResume.bind(this);
-    this.downForm = this.downForm.bind(this);
     this.state = {
       clientData: [],
     }
@@ -142,7 +141,7 @@ class ClientsData extends Component {
     });
   };
 
-  downResume = (id, firstName, lastName) =>{
+  downResume = (id, first_name, last_name) =>{
     fetch(`/api/pdf/${id}`, {
       headers: {
         'Accept': 'application/pdf',
@@ -151,44 +150,9 @@ class ClientsData extends Component {
       },
       method: 'GET'
     })
-    .then((response) => {
-      if (response.status === 400) {
-        alert("ERROR ON DOWNLOAD")
-        return "ERROR"
-      }
-      return response.blob()
-    })
+    .then((response) => response.blob())
     .then((responseBlob) => {
-      if(responseBlob === "ERROR"){
-        return
-      }
-      FileSaver.saveAs(responseBlob, firstName + "_" + lastName + "_Resume");
-    });
-  };
-
-  downForm = (id, firstName, lastName) =>{
-    fetch(`api/pdf/form/${id}`, {
-      headers: {
-        'Accept': 'application/pdf',
-        'Content-Type': 'application/pdf',
-        'Authorization': 'JWT '+localStorage.getItem("token")
-      },
-      method: 'GET',
-    })
-    .then((response) => {
-      if (response.status === 400) {
-        alert("ERROR ON DOWNLOAD")
-        return "ERROR"
-      }
-      //console.log(JSON.stringify(response))
-      return response.blob()
-    })
-    .then((responseBlob) => {
-      //console.log(response.body)
-      if(responseBlob === "ERROR"){
-        return
-      }
-       FileSaver.saveAs(responseBlob, lastName + "_de1277");
+       FileSaver.saveAs(responseBlob, 'Resume_' + first_name + last_name + '.pdf');
     });
   };
 
@@ -202,11 +166,9 @@ class ClientsData extends Component {
       <tr>
         <td> {item.last_name} </td>
         <td> {item.first_name} </td>
-        <td><NavLink id="toUser" to={`/user/${item.id}`} activeClassName="selected"><button>View Profile</button></NavLink></td>
+        <td><NavLink id="toUser" to={`/lucas/user/${item.id}`} activeClassName="selected"><button>View Profile</button></NavLink></td>
         <td><button onClick={()=>this.downResume(item.id, item.first_name, item.last_name)}> Download Resume </button></td>
-        <td><button onClick={()=>this.downForm(item.id, item.first_name, item.last_name)}> Download Form </button></td>
-        <td> {moment(item.registration_date).format('MM/DD/YY')} </td>
-        <td> {item.updatedAt} </td>
+        <td> {item.UpdatedAt} </td>
       </tr>
     ))
 
@@ -219,8 +181,6 @@ class ClientsData extends Component {
               <th>First Name</th>
               <th></th>
               <th></th>
-              <th></th>
-              <th>Reg. Date</th>
               <th>Last Updated</th>
             </tr>
           </thead>
@@ -233,4 +193,4 @@ class ClientsData extends Component {
   }
 }
 
-export default (ClientsData);
+export default (Lucas_ClientData);

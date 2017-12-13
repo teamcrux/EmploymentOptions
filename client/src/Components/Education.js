@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import selectState from '../SelectState';
+import selectState from './SelectState';
 
 const Education = () => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, FieldArray } from 'redux-form';
-import renderSkills from '../KeySkills'
+import renderSkills from './KeySkills'
 
 const ResumeInfo = () => {
   return (

@@ -1,20 +1,20 @@
 import React from 'react';
-import ClientsTable from './ClientsTable'
+import ClientTable from './ClientTable'
 import UserHeader from './UserHeader'
 import UserNavBar from './UserNavBar'
 
-let ClientsData = (props) => {
+let ClientData = (props) => {
 
   return (
     <div className="clients-page">
       <UserHeader />
       <div className="container flexbox">
         <UserNavBar />
-        <ClientsTable />
+        <ClientTable />
       </div>
     </div>
   );
 };
 
 
-export default (ClientsData);
+export default (ClientData);
